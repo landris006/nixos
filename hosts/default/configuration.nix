@@ -135,7 +135,6 @@
     btop
     neovim
     alacritty
-    fzf
     ripgrep
     gnumake
     git

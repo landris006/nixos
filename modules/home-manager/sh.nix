@@ -6,6 +6,8 @@
     settings = pkgs.lib.importTOML ./starship.toml;
   };
 
+  programs.fzf.enable = true;
+
   programs.zoxide = {
     enable = true;
     options = [ "--cmd cd" ];
