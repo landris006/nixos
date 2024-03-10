@@ -151,6 +151,8 @@
     alsaUtils
     alsa-lib
     hyprshade
+    cargo
+    rustc
   ];
 
   environment.sessionVariables = {
