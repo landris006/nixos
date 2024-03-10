@@ -12,6 +12,7 @@
       inputs.home-manager.nixosModules.default
       ./hardware-configuration.nix
       ../../modules/nixos/nvidia.nix
+      ../../modules/nixos/gaming.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -171,7 +172,6 @@
     };
 
     firefox.enable = true;
-    steam.enable = true;
   };
 
   fonts = {
