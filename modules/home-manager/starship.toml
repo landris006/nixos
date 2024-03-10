@@ -2,19 +2,20 @@
 
 add_newline = false
 
-format = """
-$username\
-$hostname\
-$directory\
-$nix_shell\
-$git_branch\
-$git_state\
-$git_status\
-$git_metrics\
-$fill\
-$nodejs\
-$line_break\
-$character"""
+# format = """
+#   $username\
+#   $hostname\
+#   $directory\
+#   $git_branch\
+#   $git_state\
+#   $git_status\
+#   $nix_shell\
+#   $git_metrics\
+#   $fill\
+#   $nodejs\
+#   $line_break\
+#   $character
+# """
 
 [hostname]
 ssh_only = false
@@ -44,5 +45,9 @@ format = '[$symbol $branch]($style)'
 style = 'bold green'
 
 [nix_shell]
-symbol = '❄️ '
+format = '[$symbol]($style) '
+symbol = '❄️'
 style = 'bold blue'
+
+[package]
+disabled = true
