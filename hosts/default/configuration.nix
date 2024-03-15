@@ -124,12 +124,17 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     feh
+    vlc
     dunst
     grim
     slurp
     wl-clipboard
     rofi-wayland
-    hyprpaper
+    swww
+    lz4
+    eww
+    jq
+    socat
     libnotify
     waybar
     wget
@@ -153,6 +158,7 @@
     hyprshade
     cargo
     rustc
+    nodejs
   ];
 
   environment.sessionVariables = {

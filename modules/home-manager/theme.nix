@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  programs.eww = {
+    enable = false;
+  };
+
   qt = {
     enable = true;
     style = {
