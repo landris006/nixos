@@ -36,7 +36,7 @@ truncation_length = 10
 style = 'bold blue'
 
 [nodejs]
-format = '[$symbol $version]($style)'
+format = ' [$symbol $version]($style)'
 symbol = ''
 
 [git_branch]
