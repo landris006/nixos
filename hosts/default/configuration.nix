@@ -159,6 +159,8 @@
     cargo
     rustc
     nodejs
+    qt5.qtwayland
+    qt6.qtwayland
   ];
 
   environment.sessionVariables = {
