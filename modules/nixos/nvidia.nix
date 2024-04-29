@@ -33,14 +33,21 @@
         #
         # patches = [ rcu_patch ];
 
-        version = "550.40.53";
-        persistencedVersion = "550.54.14";
-        settingsVersion = "550.54.14";
-        sha256_64bit = "sha256-ZA5pb1xjzDyEBrf3UYHta4T9laCOCW7LHJwhcdjw6MA=";
-        openSha256 = "sha256-p4FL0j9Ev4SJ3YcjfhFLxbMbc77dBblkrTYK50+OYqA=";
-        settingsSha256 = "sha256-m2rNASJp0i0Ez2OuqL+JpgEF0Yd8sYVCyrOoo/ln2a4=";
-        persistencedSha256 = "sha256-XaPN8jVTjdag9frLPgBtqvO/goB5zxeGzaTU0CdL6C4=";
-        url = "https://developer.nvidia.com/downloads/vulkan-beta-5504053-linux";
+        # version = "550.40.53";
+        # persistencedVersion = "550.54.14";
+        # settingsVersion = "550.54.14";
+        # sha256_64bit = "sha256-ZA5pb1xjzDyEBrf3UYHta4T9laCOCW7LHJwhcdjw6MA=";
+        # openSha256 = "sha256-p4FL0j9Ev4SJ3YcjfhFLxbMbc77dBblkrTYK50+OYqA=";
+        # settingsSha256 = "sha256-m2rNASJp0i0Ez2OuqL+JpgEF0Yd8sYVCyrOoo/ln2a4=";
+        # persistencedSha256 = "sha256-XaPN8jVTjdag9frLPgBtqvO/goB5zxeGzaTU0CdL6C4=";
+        # url = "https://developer.nvidia.com/downloads/vulkan-beta-5504053-linux";
+
+        version = "550.78";
+        sha256_64bit = "sha256-NAcENFJ+ydV1SD5/EcoHjkZ+c/be/FQ2bs+9z+Sjv3M=";
+        sha256_aarch64 = "sha256-2POG5RWT2H7Rhs0YNfTGHO64Q8u5lJD9l/sQCGVb+AA=";
+        openSha256 = "sha256-cF9omNvfHx6gHUj2u99k6OXrHGJRpDQDcBG3jryf41Y=";
+        settingsSha256 = "sha256-lZiNZw4dJw4DI/6CI0h0AHbreLm825jlufuK9EB08iw=";
+        persistencedSha256 = "sha256-qDGBAcZEN/ueHqWO2Y6UhhXJiW5625Kzo1m/oJhvbj4=";
       };
   };
 
