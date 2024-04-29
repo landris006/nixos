@@ -28,6 +28,7 @@
 
   boot.supportedFilesystems = [ "ntfs" ];
 
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa = {
@@ -44,7 +45,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal /* pkgs.xdg-desktop-portal-gtk */ ];
   };
 
   hardware.opengl = {
@@ -89,19 +90,55 @@
       layout = "hu";
       variant = "";
     };
-    displayManager.sddm = {
+    # displayManager.sddm = {
+    #   enable = false;
+    #   wayland.enable = true;
+    #   settings = {
+    #     Autologin = {
+    #       User = "andris";
+    #       Session = "hyprland";
+    #     };
+    #   };
+    # };
+    desktopManager.plasma6.enable = false;
+    desktopManager.gnome.enable = true;
+    displayManager.autoLogin = {
       enable = true;
-      wayland.enable = true;
-      settings = {
-        Autologin = {
-          User = "andris";
-          Session = "hyprland";
-        };
-      };
+      user = "andris";
     };
-    desktopManager.plasma6.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
     libinput.enable = true;
   };
+
+  services.gnome.evolution-data-server.enable = true;
+  services.gnome.gnome-online-accounts.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+
+  # autologin fix
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    gedit # text editor
+  ]) ++ (with pkgs.gnome; [
+    cheese # webcam tool
+    gnome-music
+    gnome-terminal
+    epiphany # web browser
+    geary # email reader
+    # evince # document viewer
+    # gnome-characters
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+  ]);
 
   # Configure console keymap
   console.keyMap = "hu";
@@ -148,7 +185,6 @@
     git
     gcc
     unzip
-    nodejs
     python3
     neofetch
     tmux
@@ -161,12 +197,26 @@
     cargo
     rustc
     nodejs
+    pkgs.nodePackages."@angular/cli"
     qt5.qtwayland
     qt6.qtwayland
   ];
 
   environment.sessionVariables = {
     EDITOR = "nvim";
+
+    LIBVA_DRIVER_NAME = "nvidia";
+    XDG_SESSION_TYPE = "wayland";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    DRI_PRIME = "pci-0000_01_00_0";
+    __VK_LAYER_NV_optimus = "NVIDIA_only";
+    __GL_GSYNC_ALLOWED = "1";
+    NIXOS_OZONE_WL = "1";
+
+    # GDK_SCALE = "1.25";
+    # XCURSOR_SIZE = "32";
   };
 
   programs = {
@@ -184,15 +234,18 @@
     };
 
     firefox.enable = true;
+
+    dconf.enable = true;
+
   };
 
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      nerdfonts
-      (nerdfonts.override { fonts = [ "Hack" ]; })
-    ];
-  };
+  # fonts = {
+  #   fontDir.enable = true;
+  #   packages = with pkgs; [
+  #     nerdfonts
+  #     (nerdfonts.override { fonts = [ "Hack" ]; })
+  #   ];
+  # };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

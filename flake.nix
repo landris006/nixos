@@ -8,6 +8,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    more-waita = {
+      url = "github:somepaulo/MoreWaita";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
