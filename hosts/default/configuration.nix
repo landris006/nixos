@@ -90,27 +90,22 @@
       layout = "hu";
       variant = "";
     };
-    # displayManager.sddm = {
-    #   enable = false;
-    #   wayland.enable = true;
-    #   settings = {
-    #     Autologin = {
-    #       User = "andris";
-    #       Session = "hyprland";
-    #     };
-    #   };
-    # };
-    desktopManager.plasma6.enable = false;
     desktopManager.gnome.enable = true;
-    displayManager.autoLogin = {
-      enable = true;
-      user = "andris";
-    };
     displayManager.gdm = {
       enable = true;
       wayland = true;
     };
-    libinput.enable = true;
+  };
+
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "andris";
+  };
+
+  services.libinput.enable = true;
+
+  services.desktopManager = {
+    plasma6.enable = false;
   };
 
   services.gnome.evolution-data-server.enable = true;
