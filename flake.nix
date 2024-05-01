@@ -9,22 +9,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     more-waita = {
       url = "github:somepaulo/MoreWaita";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
+  outputs = { self, nixpkgs, hyprland, ... }@inputs:
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/default/configuration.nix
+          hyprland.nixosModules.default
         ];
       };
     };
