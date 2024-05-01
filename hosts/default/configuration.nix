@@ -160,6 +160,7 @@
     feh
     vlc
     dunst
+    swaynotificationcenter
     grim
     slurp
     wl-clipboard
