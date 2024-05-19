@@ -92,16 +92,29 @@
       layout = "hu";
       variant = "";
     };
-    desktopManager.gnome.enable = true;
-    displayManager.gdm = {
+    desktopManager.xterm.enable = false;
+    windowManager.i3 = {
       enable = true;
-      wayland = true;
+      extraPackages = with pkgs; [
+        dmenu #application launcher most people use
+        i3status # gives you the default i3 status bar
+        i3lock #default i3 screen locker
+        # i3blocks #if you are planning on using i3blocks over i3status
+      ];
     };
   };
 
-  services.displayManager.autoLogin = {
+  environment.pathsToLink = [ "/libexec" ];
+
+  services.displayManager.sddm = {
     enable = true;
-    user = "andris";
+    wayland.enable = true;
+    settings = {
+      Autologin = {
+        User = "andris";
+        Session = "hyprland";
+      };
+    };
   };
 
   services.libinput.enable = true;
@@ -109,33 +122,6 @@
   services.desktopManager = {
     plasma6.enable = false;
   };
-
-  services.gnome.evolution-data-server.enable = true;
-  services.gnome.gnome-online-accounts.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-
-  # autologin fix
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
-    gedit # text editor
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    gnome-music
-    gnome-terminal
-    epiphany # web browser
-    geary # email reader
-    # evince # document viewer
-    # gnome-characters
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ]);
 
   # Configure console keymap
   console.keyMap = "hu";
@@ -174,6 +160,7 @@
     socat
     libnotify
     waybar
+    waybar-mpris
     wget
     btop
     neovim
