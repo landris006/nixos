@@ -45,7 +45,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal /* pkgs.xdg-desktop-portal-gtk */ ];
+    extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
   };
 
   hardware.opengl = {
@@ -108,7 +108,7 @@
 
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
+    wayland.enable = false;
     settings = {
       Autologin = {
         User = "andris";
@@ -117,7 +117,10 @@
     };
   };
 
-  services.libinput.enable = true;
+  services.libinput = {
+    enable = true;
+    mouse.accelProfile = "flat";
+  };
 
   services.desktopManager = {
     plasma6.enable = false;
@@ -180,6 +183,7 @@
     alsa-lib
     hyprshade
     hyprlock
+    stow
     playerctl
     cargo
     rustc
@@ -193,7 +197,7 @@
     EDITOR = "nvim";
 
     LIBVA_DRIVER_NAME = "nvidia";
-    XDG_SESSION_TYPE = "wayland";
+    # XDG_SESSION_TYPE = "wayland";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     WLR_NO_HARDWARE_CURSORS = "1";
