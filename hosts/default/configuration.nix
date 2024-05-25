@@ -108,7 +108,7 @@
 
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = false;
+    wayland.enable = true;
     settings = {
       Autologin = {
         User = "andris";
