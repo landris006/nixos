@@ -142,55 +142,57 @@
     users = {
       "andris" = import ./home.nix;
     };
+    backupFileExtension = "backup";
   };
 
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    feh
-    vlc
+    alacritty
+    alsa-lib
+    alsaUtils
+    btop
+    cargo
     dunst
-    swaynotificationcenter
-    grim
-    slurp
-    wl-clipboard
-    rofi-wayland
-    swww
-    lz4
     eww
+    feh
+    gammastep
+    gcc
+    git
+    gnumake
+    grim
+    hyprlock
+    hyprshade
     jq
-    socat
     libnotify
+    lz4
+    neofetch
+    neovim
+    nodejs
+    pavucontrol
+    pkgs.nodePackages."@angular/cli"
+    playerctl
+    pulseaudio
+    python3
+    qt5.qtwayland
+    qt6.qtwayland
+    ripgrep
+    rofi-wayland
+    rustc
+    slurp
+    socat
+    stow
+    swaynotificationcenter
+    swww
+    tmux
+    tokyo-night-gtk
+    unzip
+    vlc
     waybar
     waybar-mpris
     wget
-    btop
-    neovim
-    alacritty
-    ripgrep
-    gnumake
-    git
-    gcc
-    unzip
-    python3
-    neofetch
-    tmux
-    tokyo-night-gtk
-    pavucontrol
-    pulseaudio
-    alsaUtils
-    alsa-lib
-    hyprshade
-    hyprlock
-    stow
-    playerctl
-    cargo
-    rustc
-    nodejs
-    pkgs.nodePackages."@angular/cli"
-    qt5.qtwayland
-    qt6.qtwayland
+    wl-clipboard
   ];
 
   environment.sessionVariables = {
