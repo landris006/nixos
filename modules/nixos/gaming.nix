@@ -13,5 +13,14 @@
         };
       }
     )
+    (appimageTools.wrapType2
+      {
+        name = "wowup";
+        src = fetchurl {
+          url = "https://github.com/WowUp/WowUp/releases/download/v2.12.1-beta.2/WowUp-2.12.1-beta.2.AppImage";
+          hash = "sha256-SIdI2L/w8PwGiECe6mVAC3QJoUNcQwRFYZsVKVnoAkU=";
+        };
+      }
+    )
   ];
 }
