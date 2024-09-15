@@ -26,10 +26,10 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/store" =
+  fileSystems."/mnt/D" =
     {
-      device = "/dev/disk/by-uuid/057262f0-47d8-4434-a493-763cc7033322";
-      fsType = "ext4";
+      device = "/dev/disk/by-uuid/2E72FC4A72FC1873";
+      fsType = "ntfs";
       options = [ "nofail" ];
     };
 

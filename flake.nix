@@ -9,6 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=0f594732b063a90d44df8c5d402d658f27471dfe"; /* 0.43.0 */
+
     more-waita = {
       url = "github:somepaulo/MoreWaita";
       flake = false;
@@ -21,6 +23,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/default/configuration.nix
+          # hyprland.nixosModules.default
         ];
       };
     };
