@@ -7,21 +7,6 @@ let
     ];
   });
 
-  icon-theme = {
-    name = "Papirus-Dark";
-    package = (pkgs.catppuccin-papirus-folders.override {
-      flavor = "mocha";
-      accent = "lavender";
-    });
-  };
-
-  gtk-theme = {
-    name = "Catppuccin-Mocha-Standard-Blue-Dark";
-    package = (pkgs.catppuccin-gtk.override {
-      variant = "mocha";
-    });
-  };
-
   cursor-theme = {
     name = "Bibata-Modern-Classic";
     package = pkgs.bibata-cursors;
@@ -69,8 +54,19 @@ in
 
   gtk = {
     enable = true;
-    theme = gtk-theme;
+    theme = {
+      name = "catppuccin-mocha-blue-standard";
+      package = (pkgs.catppuccin-gtk.override {
+        variant = "mocha";
+      });
+    };
     cursorTheme = cursor-theme;
-    iconTheme = icon-theme;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = (pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "lavender";
+      });
+    };
   };
 }

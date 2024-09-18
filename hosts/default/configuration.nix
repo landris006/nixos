@@ -28,6 +28,8 @@
 
   boot.supportedFilesystems = [ "ntfs" ];
 
+  hardware.opentabletdriver.enable = true;
+
   hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
@@ -42,6 +44,8 @@
 
   services.flatpak.enable = true;
 
+  services.gvfs.enable = true;
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
@@ -54,7 +58,7 @@
   };
 
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "home"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -153,6 +157,9 @@
     alsaUtils
     btop
     cargo
+    chromium
+    teams-for-linux
+    krita
     dunst
     eww
     feh
@@ -160,9 +167,11 @@
     gcc
     git
     gnumake
+    google-chrome
     grim
     hyprlock
     hyprshade
+    inotify-tools
     jq
     libnotify
     lz4
@@ -185,7 +194,6 @@
     swaynotificationcenter
     swww
     tmux
-    tokyo-night-gtk
     unzip
     vlc
     waybar
@@ -206,6 +214,9 @@
     __VK_LAYER_NV_optimus = "NVIDIA_only";
     __GL_GSYNC_ALLOWED = "1";
     NIXOS_OZONE_WL = "1";
+
+    # Firefox crashes under wayland + nvidia 555 (explicit sync) 
+    # MOZ_ENABLE_WAYLAND = 0;
 
     # GDK_SCALE = "1.25";
     # XCURSOR_SIZE = "32";
