@@ -19,10 +19,10 @@
 
   outputs = { nixpkgs, ... }@inputs:
     {
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.home = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/default/configuration.nix
+          ./hosts/home/configuration.nix
           # hyprland.nixosModules.default
         ];
       };

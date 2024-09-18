@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-
   imports =
     [
       ../../modules/home-manager/sh.nix
