@@ -170,6 +170,7 @@
     google-chrome
     grim
     hyprlock
+    hyprshot
     hyprshade
     inotify-tools
     jq
