@@ -42,6 +42,8 @@
     wireplumber.enable = true;
   };
 
+  services.postgresql.enable = true;
+
   services.flatpak.enable = true;
 
   services.gvfs.enable = true;
@@ -152,28 +154,37 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    transmission_4-gtk
+    syshud
+    polkit-kde-agent
+    gparted
     alacritty
     alsa-lib
     alsaUtils
+    azure-cli
+    azure-functions-core-tools
     btop
     cargo
     chromium
-    teams-for-linux
-    krita
     dunst
     eww
     feh
+    file-roller
     gammastep
     gcc
     git
     gnumake
+    go
+    go-tools
     google-chrome
     grim
     hyprlock
-    hyprshot
+    hyprls
     hyprshade
+    hyprshot
     inotify-tools
     jq
+    krita
     libnotify
     lz4
     neofetch
@@ -185,7 +196,9 @@
     pulseaudio
     python3
     qt5.qtwayland
+    libsForQt5.kio
     qt6.qtwayland
+    remmina
     ripgrep
     rofi-wayland
     rustc
@@ -194,6 +207,7 @@
     stow
     swaynotificationcenter
     swww
+    teams-for-linux
     tmux
     unzip
     vlc
@@ -223,6 +237,8 @@
     # XCURSOR_SIZE = "32";
   };
 
+  security.polkit.enable = true;
+
   programs = {
     hyprland = {
       enable = true;
@@ -241,6 +257,9 @@
 
     dconf.enable = true;
 
+    nix-ld.enable = true;
+
+    droidcam.enable = true;
   };
 
   # fonts = {

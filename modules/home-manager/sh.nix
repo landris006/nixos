@@ -15,5 +15,10 @@
 
   # programs.tmux.enable = true;
 
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      PATH=$HOME/.local/bin:$PATH
+    '';
+  };
 }
