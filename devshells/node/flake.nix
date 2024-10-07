@@ -21,6 +21,9 @@
               ember-cli
               yarn
             ];
+            shellHook = ''
+              PATH="$PATH:$HOME/src/dbx/moby-scripts:$HOME/src/dbx/moby-mpb/scripts"
+            '';
           };
           default = devShells.node-22;
         };
