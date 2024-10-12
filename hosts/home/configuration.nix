@@ -155,6 +155,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     transmission_4-gtk
+    libreoffice
     syshud
     polkit-kde-agent
     gparted
