@@ -194,7 +194,8 @@
     pkgs.nodePackages."@angular/cli"
     playerctl
     pulseaudio
-    python3
+    python312Full
+    poetry
     qt5.qtwayland
     libsForQt5.kio
     qt6.qtwayland
