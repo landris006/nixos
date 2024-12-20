@@ -4,31 +4,33 @@
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, utils }:
-    utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            jdk17
-            maven
-            jetbrains.idea-community
-          ];
+  outputs = {
+    self,
+    nixpkgs,
+    utils,
+  }:
+    utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+      java = pkgs.jdk21;
+    in {
+      devShells.default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          java
+          maven
+          jetbrains.idea-community
+        ];
 
-          NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-            pkgs.stdenv.cc.cc
-            pkgs.openssl
-            pkgs.linux-pam
-          ];
-          NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+        LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+          pkgs.stdenv.cc.cc
+          pkgs.openssl
+          pkgs.linux-pam
+        ];
 
-          shellHook = ''
-            export JAVA_HOME=${pkgs.jdk17}
-            export JDK_HOME=${pkgs.jdk17}
-            PATH="${pkgs.jdk17}/bin:$PATH"
-          '';
-        };
-      });
+        shellHook = ''
+          export JAVA_HOME=${java}
+          export JDK_HOME=${java}
+          PATH="${java}/bin:$PATH"
+        '';
+      };
+    });
 }
