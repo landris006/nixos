@@ -54,7 +54,8 @@
     (
       appimageTools.wrapType2
       {
-        name = "awakened-poe-trade";
+        pname = "awakened-poe-trade";
+        version = "3.25.102";
         src = fetchurl {
           url = "https://github.com/SnosMe/awakened-poe-trade/releases/download/v3.25.102/Awakened-PoE-Trade-3.25.102.AppImage";
           hash = "sha256-lcdKJ+B8NQmyMsv+76+eeESSrfR/7Mq6svO5VKaoNUY=";
@@ -64,7 +65,8 @@
     (
       appimageTools.wrapType2
       {
-        name = "wowup";
+        pname = "wowup";
+        version = "2.12.1-beta.2";
         src = fetchurl {
           url = "https://github.com/WowUp/WowUp/releases/download/v2.12.1-beta.2/WowUp-2.12.1-beta.2.AppImage";
           hash = "sha256-SIdI2L/w8PwGiECe6mVAC3QJoUNcQwRFYZsVKVnoAkU=";

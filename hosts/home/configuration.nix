@@ -308,8 +308,7 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      # nerdfonts
-      (nerdfonts.override {fonts = ["Hack"];})
+      nerd-fonts.hack
     ];
   };
   # Some programs need SUID wrappers, can be configured further or are
