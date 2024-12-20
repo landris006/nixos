@@ -1,12 +1,9 @@
-{ pkgs, ... }:
-
-{
-  imports =
-    [
-      ../../modules/home-manager/sh.nix
-      ../../modules/home-manager/theme.nix
-      ../../modules/home-manager/hypr/hyprland.nix
-    ];
+{pkgs, ...}: {
+  imports = [
+    ../../modules/home-manager/sh.nix
+    ../../modules/home-manager/theme.nix
+    ../../modules/home-manager/hypr/hyprland.nix
+  ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -25,16 +22,14 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
-
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
     webcord
-    vesktop
     spotify
   ];
 

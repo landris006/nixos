@@ -1,6 +1,8 @@
-{ pkgs, inputs, ... }:
-
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.gamemode = {
     enable = true;
     settings = {
@@ -15,18 +17,24 @@
     };
   };
 
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-    args = [
-      "--rt"
-      "--expose-wayland"
-    ];
-  };
-
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
+    # package = pkgs.steam.override {
+    #   extraPkgs = pkgs:
+    #     with pkgs; [
+    #       xorg.libXcursor
+    #       xorg.libXi
+    #       xorg.libXinerama
+    #       xorg.libXScrnSaver
+    #       libpng
+    #       libpulseaudio
+    #       libvorbis
+    #       stdenv.cc.cc.lib
+    #       libkrb5
+    #       keyutils
+    #     ];
+    # };
     extraCompatPackages = [
       pkgs.proton-ge-bin
     ];
@@ -42,8 +50,9 @@
 
   environment.systemPackages = with pkgs; [
     lutris
-    (wine.override { wineBuild = "wine64"; })
-    (appimageTools.wrapType2
+    (wine.override {wineBuild = "wine64";})
+    (
+      appimageTools.wrapType2
       {
         name = "awakened-poe-trade";
         src = fetchurl {
@@ -52,7 +61,8 @@
         };
       }
     )
-    (appimageTools.wrapType2
+    (
+      appimageTools.wrapType2
       {
         name = "wowup";
         src = fetchurl {

@@ -1,21 +1,20 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, inputs, ... }:
-
-
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      inputs.home-manager.nixosModules.default
-      ./hardware-configuration.nix
-      ../../modules/nixos/nvidia.nix
-      ../../modules/nixos/gaming.nix
-    ];
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    inputs.home-manager.nixosModules.default
+    ./hardware-configuration.nix
+    ../../modules/nixos/nvidia.nix
+    ../../modules/nixos/gaming.nix
+  ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Allow unfree packages
   nixpkgs.config = {
@@ -26,7 +25,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = ["ntfs"];
 
   hardware.opentabletdriver.enable = true;
 
@@ -51,7 +50,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland];
   };
 
   hardware.graphics = {
@@ -59,8 +58,13 @@
     enable32Bit = true;
   };
 
-
   networking.hostName = "home"; # Define your hostname.
+  networking.extraHosts = let
+    path = "/etc/extra-hosts";
+  in
+    if builtins.pathExists path
+    then builtins.readFile path
+    else "";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -109,7 +113,11 @@
     };
   };
 
-  environment.pathsToLink = [ "/libexec" ];
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
+  '';
+
+  environment.pathsToLink = ["/libexec"];
 
   services.displayManager.sddm = {
     enable = true;
@@ -138,31 +146,50 @@
   users.users.andris = {
     isNormalUser = true;
     description = "andris";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" "render" ];
+    extraGroups = ["networkmanager" "wheel" "audio" "video" "render" "docker"];
     # packages = with pkgs; [ ];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       "andris" = import ./home.nix;
     };
     backupFileExtension = "backup";
   };
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      ags = prev.ags.overrideAttrs (old: {
+        buildInputs = old.buildInputs ++ [pkgs.libdbusmenu-gtk3];
+      });
+    })
+  ];
+
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    libnotify
+    (flameshot.override {
+      enableWlrSupport = true;
+    })
+    azuredatastudio
+    nixd
+    alejandra
+    ags
+    sassc
+    bun
     transmission_4-gtk
     libreoffice
     syshud
+    vesktop
+    kate
     polkit-kde-agent
     gparted
     alacritty
     alsa-lib
-    alsaUtils
+    alsa-utils
     azure-cli
     azure-functions-core-tools
     btop
@@ -178,7 +205,6 @@
     gnumake
     go
     go-tools
-    google-chrome
     grim
     hyprlock
     hyprls
@@ -194,6 +220,7 @@
     nodejs
     pavucontrol
     pkgs.nodePackages."@angular/cli"
+    pkgs.nodePackages.nodemon
     playerctl
     pulseaudio
     python312Full
@@ -218,29 +245,42 @@
     waybar-mpris
     wget
     wl-clipboard
+    wf-recorder
+    losslesscut-bin
+    baobab
   ];
+
+  systemd.user.tmpfiles.rules = [
+    "L %t/discord-ipc-0 - - - - .flatpak/dev.vencord.Vesktop/xdg-run/discord-ipc-0"
+  ];
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
   environment.sessionVariables = {
     EDITOR = "nvim";
-
-    LIBVA_DRIVER_NAME = "nvidia";
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 1;
     # XDG_SESSION_TYPE = "wayland";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    DRI_PRIME = "pci-0000_01_00_0";
-    __VK_LAYER_NV_optimus = "NVIDIA_only";
+    # WLR_NO_HARDWARE_CURSORS = "1";
+
     __GL_GSYNC_ALLOWED = "1";
     NIXOS_OZONE_WL = "1";
 
-    # Firefox crashes under wayland + nvidia 555 (explicit sync) 
+    # Firefox crashes under wayland + nvidia 555 (explicit sync)
     # MOZ_ENABLE_WAYLAND = 0;
 
     # GDK_SCALE = "1.25";
     # XCURSOR_SIZE = "32";
   };
 
-  security.polkit.enable = true;
+  security = {
+    polkit.enable = true;
+  };
 
   programs = {
     hyprland = {
@@ -265,13 +305,13 @@
     droidcam.enable = true;
   };
 
-  # fonts = {
-  #   fontDir.enable = true;
-  #   packages = with pkgs; [
-  #     nerdfonts
-  #     (nerdfonts.override { fonts = [ "Hack" ]; })
-  #   ];
-  # };
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      # nerdfonts
+      (nerdfonts.override {fonts = ["Hack"];})
+    ];
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

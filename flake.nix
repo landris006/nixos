@@ -28,14 +28,13 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs:
-    {
-      nixosConfigurations.home = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/home/configuration.nix
-          # hyprland.nixosModules.default
-        ];
-      };
+  outputs = {nixpkgs, ...} @ inputs: {
+    nixosConfigurations.home = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/home/configuration.nix
+        # hyprland.nixosModules.default
+      ];
     };
+  };
 }

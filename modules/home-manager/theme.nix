@@ -1,32 +1,10 @@
-{ pkgs, ... }:
-
-let
-  nerdfonts = (pkgs.nerdfonts.override {
-    fonts = [
-      "Hack"
-    ];
-  });
-
+{pkgs, ...}: let
   cursor-theme = {
     name = "Bibata-Modern-Classic";
     package = pkgs.bibata-cursors;
   };
-in
-{
+in {
   home = {
-    packages = [
-      pkgs.nerdfonts
-    ];
-    file = {
-      ".local/share/fonts" = {
-        recursive = true;
-        source = "${nerdfonts}/share/fonts/truetype/NerdFonts";
-      };
-      ".fonts" = {
-        recursive = true;
-        source = "${nerdfonts}/share/fonts/truetype/NerdFonts";
-      };
-    };
     sessionVariables = {
       XCURSOR_THEME = cursor-theme.name;
       XCURSOR_SIZE = "24";
@@ -56,17 +34,17 @@ in
     enable = true;
     theme = {
       name = "catppuccin-mocha-blue-standard";
-      package = (pkgs.catppuccin-gtk.override {
+      package = pkgs.catppuccin-gtk.override {
         variant = "mocha";
-      });
+      };
     };
     cursorTheme = cursor-theme;
     iconTheme = {
       name = "Papirus-Dark";
-      package = (pkgs.catppuccin-papirus-folders.override {
+      package = pkgs.catppuccin-papirus-folders.override {
         flavor = "mocha";
         accent = "lavender";
-      });
+      };
     };
   };
 }
