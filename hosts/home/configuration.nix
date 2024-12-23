@@ -296,7 +296,10 @@
       ];
     };
 
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      package = pkgs.firefox-devedition;
+    };
 
     dconf.enable = true;
 
