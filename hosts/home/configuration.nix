@@ -175,6 +175,7 @@
       enableWlrSupport = true;
     })
     azuredatastudio
+    swappy
     nixd
     alejandra
     ags
