@@ -168,12 +168,15 @@
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
+  environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     (flameshot.override {
       enableWlrSupport = true;
     })
+    gnome-keyring
+    openvpn
     azuredatastudio
     swappy
     nixd
@@ -281,7 +284,11 @@
 
   security = {
     polkit.enable = true;
+    pam.services.sddm = {
+      enableGnomeKeyring = true;
+    };
   };
+  services.gnome.gnome-keyring.enable = true;
 
   programs = {
     hyprland = {

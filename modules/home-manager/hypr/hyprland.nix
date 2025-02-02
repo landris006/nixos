@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
+    xwayland.enable = true;
     plugins = with pkgs.hyprlandPlugins; [
       # hyprspace
       # hyprexpo
