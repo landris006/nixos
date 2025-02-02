@@ -49,7 +49,12 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    gamescope
     lutris
+    (xivlauncher-rb.override {
+      useGameMode = true;
+      nvngxPath = "${config.hardware.nvidia.package}/lib/nvidia/wine";
+    })
     (wine.override {wineBuild = "wine64";})
     (
       appimageTools.wrapType2

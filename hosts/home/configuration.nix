@@ -265,7 +265,7 @@
 
   environment.sessionVariables = {
     EDITOR = "nvim";
-    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 1;
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 0;
     # XDG_SESSION_TYPE = "wayland";
     # WLR_NO_HARDWARE_CURSORS = "1";
 

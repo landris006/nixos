@@ -74,6 +74,26 @@
         "type": "github"
       }
     },
+    "nixos-xivlauncher-rb": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1736546665,
+        "narHash": "sha256-g2u1VkxiWUDW+8LV9CYKxYH/QhD8yR4HW+Au/l9opXc=",
+        "owner": "drakon64",
+        "repo": "nixos-xivlauncher-rb",
+        "rev": "fe5a20587ef78b872bb3af0af00baf178a5951b2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "drakon64",
+        "repo": "nixos-xivlauncher-rb",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1733935885,
@@ -123,6 +143,7 @@
         "home-manager": "home-manager",
         "more-waita": "more-waita",
         "nix-gaming": "nix-gaming",
+        "nixos-xivlauncher-rb": "nixos-xivlauncher-rb",
         "nixpkgs": "nixpkgs_2"
       }
     },
