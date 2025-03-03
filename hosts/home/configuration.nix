@@ -189,7 +189,7 @@
     syshud
     vesktop
     kate
-    polkit-kde-agent
+    hyprpolkitagent
     gparted
     alacritty
     alsa-lib
