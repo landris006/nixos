@@ -241,6 +241,7 @@
     stow
     swaynotificationcenter
     swww
+    slack
     teams-for-linux
     tmux
     unzip
