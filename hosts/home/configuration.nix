@@ -194,8 +194,6 @@
     alacritty
     alsa-lib
     alsa-utils
-    azure-cli
-    azure-functions-core-tools
     btop
     cargo
     chromium
