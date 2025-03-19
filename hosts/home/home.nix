@@ -48,6 +48,18 @@
     # '';
   };
 
+  services.gammastep = {
+    enable = true;
+    tray = true;
+    provider = "manual";
+    latitude = 47.5;
+    longitude = 19.0;
+    temperature = {
+      day = 6500;
+      night = 4500;
+    };
+  };
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at
