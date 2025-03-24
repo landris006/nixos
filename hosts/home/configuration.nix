@@ -187,10 +187,11 @@
     transmission_4-gtk
     libreoffice
     syshud
-    vesktop
+    vscode
     kate
     hyprpolkitagent
     gparted
+    ffmpeg
     alacritty
     alsa-lib
     alsa-utils
@@ -217,6 +218,7 @@
     krita
     libnotify
     lz4
+    google-chrome
     neofetch
     neovim
     nodejs
@@ -224,6 +226,7 @@
     pkgs.nodePackages."@angular/cli"
     pkgs.nodePackages.nodemon
     playerctl
+    discord
     pulseaudio
     python312Full
     poetry
