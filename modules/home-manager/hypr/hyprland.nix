@@ -203,14 +203,12 @@
         ",XF86AudioLowerVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume lower"
         ",XF86AudioMute,        exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle"
 
+        ",XF86MonBrightnessUp,   exec, ${pkgs.swayosd}/bin/swayosd-client --brightness raise"
+        ",XF86MonBrightnessDown, exec, ${pkgs.swayosd}/bin/swayosd-client --brightness lower"
+
         ",XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
         ",XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next "
         ",XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
-
-        # TODO:
-        # ",XF86MonBrightnessUp, exec, bri --up"
-        # ",XF86MonBrightnessDown, exec, bri --down"
-        # ",XF86Search, exec, launchpad"
       ];
     };
   };
