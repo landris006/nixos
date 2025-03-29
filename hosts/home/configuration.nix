@@ -113,6 +113,23 @@
     };
   };
 
+  services.udev.packages = [pkgs.swayosd];
+
+  systemd.services.swayosd-libinput-backend = {
+    description = "SwayOSD LibInput backend for listening to certain keys like CapsLock, ScrollLock, VolumeUp, etc.";
+    documentation = ["https://github.com/ErikReider/SwayOSD"];
+    wantedBy = ["graphical.target"];
+    partOf = ["graphical.target"];
+    after = ["graphical.target"];
+
+    serviceConfig = {
+      Type = "dbus";
+      BusName = "org.erikreider.swayosd";
+      ExecStart = "${pkgs.swayosd}/bin/swayosd-libinput-backend";
+      Restart = "on-failure";
+    };
+  };
+
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
   '';
@@ -275,7 +292,6 @@
     # WLR_NO_HARDWARE_CURSORS = "1";
 
     __GL_GSYNC_ALLOWED = "1";
-    NIXOS_OZONE_WL = "1";
 
     # Firefox crashes under wayland + nvidia 555 (explicit sync)
     # MOZ_ENABLE_WAYLAND = 0;
