@@ -20,6 +20,7 @@
       ];
 
       exec-once = [
+        "hyprctl switchxkblayout current next"
         "hyprctl dispatch workspace 1"
         "${pkgs.swaynotificationcenter}/bin/swaync -c $HOME/.config/swaync/config.json"
         "${pkgs.waybar}/bin/waybar"
