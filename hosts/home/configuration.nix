@@ -310,6 +310,8 @@
   };
   services.gnome.gnome-keyring.enable = true;
 
+  services.tumbler.enable = true; # for thunar thumbnails
+
   programs = {
     hyprland = {
       enable = true;
