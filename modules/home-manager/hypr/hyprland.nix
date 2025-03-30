@@ -13,6 +13,16 @@
     sourceFirst = false;
     settings = let
       mainMod = "ALT_L";
+      startReplay = pkgs.writeShellScriptBin "start-replay" ''
+        pidof -q gpu-screen-recorder && exit 0
+        video_path="$HOME/Videos"
+        mkdir -p "$video_path"
+        ${pkgs.gpu-screen-recorder}/bin/gpu-screen-recorder -w screen -f 60 -a "default_output|default_input" -c mkv -bm cbr -q 45000 -r 180 -o "$video_path" \
+          && sleep 0.5 && notify-send -u low -- "GPU Screen Recorder" "Started recording in replay mode"
+      '';
+      saveReplay = pkgs.writeShellScriptBin "save-replay" ''
+        killall -SIGUSR1 gpu-screen-recorder && sleep 0.5 && notify-send -u low -- "GPU Screen Recorder" "Replay saved"
+      '';
     in {
       source = [
         "$HOME/.config/hypr/monitors.conf"
@@ -28,6 +38,7 @@
         "systemctl --user start hyprpolkitagent"
         "${pkgs.swww}/bin/swww img ~/.config/hypr/wallpapers/city.png --transition-fps 165 --transition-type grow --transition-pos 0.8,0.9"
         "${pkgs.swayosd}/bin/swayosd-server"
+        "${startReplay}/bin/start-replay"
       ];
 
       input = {
@@ -192,6 +203,8 @@
         "${mainMod} CONTROL, 7, movetoworkspacesilent, 7"
         "${mainMod} CONTROL, 8, movetoworkspacesilent, 8"
         "${mainMod} CONTROL, 9, movetoworkspacesilent, 9"
+
+        "${mainMod}, F10, exec, ${saveReplay}/bin/save-replay"
       ];
 
       bindm = [

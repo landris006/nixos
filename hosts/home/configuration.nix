@@ -243,6 +243,8 @@
     pkgs.nodePackages."@angular/cli"
     pkgs.nodePackages.nodemon
     playerctl
+    gpu-screen-recorder
+    killall
     discord
     pulseaudio
     python312Full
@@ -313,6 +315,8 @@
       enable = true;
       xwayland.enable = true;
     };
+
+    gpu-screen-recorder.enable = true; # avoid the prompt when starting pkgs.gpu-screen-recorder
 
     direnv.enable = true;
 
