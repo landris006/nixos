@@ -143,17 +143,17 @@
 
       bind = [
         "${mainMod} CONTROL SHIFT, Q, exit"
-        "${mainMod} CONTROL,       W, killactive"
-        "${mainMod},               V, togglefloating"
-        "${mainMod},               F, fullscreen"
+        "${mainMod} CONTROL      , W, killactive"
+        "${mainMod}              , V, togglefloating"
+        "${mainMod}              , F, fullscreen"
 
         "${mainMod} CONTROL, T, exec, ${pkgs.alacritty}/bin/alacritty"
-        "${mainMod},         O, exec, ${pkgs.rofi-wayland}/bin/rofi -mode run -show drun"
-        "${mainMod},         P, exec, ${pkgs.rofi-wayland}/bin/rofi -show window"
-        "${mainMod},         N, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
-        "${mainMod},         E, exec, thunar"
-        "SUPER      SHIFT,   S, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "SUPER,              L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+        "${mainMod}        , O, exec, ${pkgs.rofi-wayland}/bin/rofi -mode run -show drun"
+        "${mainMod}        , P, exec, ${pkgs.rofi-wayland}/bin/rofi -show window"
+        "${mainMod}        , N, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
+        "${mainMod}        , E, exec, thunar"
+        "SUPER        SHIFT, S, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
+        "SUPER             , L, exec, ${pkgs.hyprlock}/bin/hyprlock"
 
         # Alt + Tab
         "${mainMod}, tab, focuscurrentorlast"
