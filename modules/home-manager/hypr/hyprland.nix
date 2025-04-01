@@ -119,7 +119,6 @@
 
       opengl = {
         nvidia_anti_flicker = 0;
-        force_introspection = 2;
       };
 
       debug = {

@@ -205,7 +205,7 @@
     libreoffice
     syshud
     vscode
-    kate
+    kdePackages.kate
     hyprpolkitagent
     gparted
     ffmpeg
