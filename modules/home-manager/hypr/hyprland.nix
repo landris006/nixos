@@ -13,39 +13,7 @@
     sourceFirst = false;
     settings = let
       mainMod = "ALT_L";
-      startReplay = pkgs.writeShellScriptBin "start-replay" ''
-        pidof -q gpu-screen-recorder && exit 0
-        video_path="$HOME/Videos/gpu-screen-recorder"
-        mkdir -p "$video_path"
-        ${pkgs.gpu-screen-recorder}/bin/gpu-screen-recorder \
-          -w screen \
-          -f 60 \
-          -a "default_output|default_input" \
-          -c mkv \
-          -bm cbr -q 45000 \
-          -r 180 \
-          -o "$video_path" \
-          -sc ${saveVideo}/bin/save-video
-      '';
-      saveVideo = pkgs.writeShellScriptBin "save-video" ''
-        notify-send -u low -- "GPU Screen Recorder" "Saving replay..."
-
-        video_path=$1
-        video_directory=$(dirname "$video_path")
-
-        window_name="$(hyprctl activewindow -j | jq -r '.initialTitle')"
-        if [[ "$window_name" == "null" ]]; then
-          window_name="Desktop"
-        fi
-
-        mkdir -p "$video_directory/$window_name"
-        mv "$1" "$video_directory/$window_name"
-
-        notify-send -u low -- "GPU Screen Recorder" "Replay saved to $video_directory/$window_name"
-      '';
-      saveReplay = pkgs.writeShellScriptBin "save-replay" ''
-        killall -SIGUSR1 gpu-screen-recorder
-      '';
+      scripts = import ./scripts.nix {inherit pkgs;};
     in {
       source = [
         "$HOME/.config/hypr/monitors.conf"
@@ -61,7 +29,7 @@
         "systemctl --user start hyprpolkitagent"
         "${pkgs.swww}/bin/swww img ~/.config/hypr/wallpapers/city.png --transition-fps 165 --transition-type grow --transition-pos 0.8,0.9"
         "${pkgs.swayosd}/bin/swayosd-server"
-        "${startReplay}/bin/start-replay"
+        "${scripts.startReplay}/bin/start-replay"
       ];
 
       input = {
@@ -226,7 +194,7 @@
         "${mainMod} CONTROL, 8, movetoworkspacesilent, 8"
         "${mainMod} CONTROL, 9, movetoworkspacesilent, 9"
 
-        "${mainMod}, F10, exec, ${saveReplay}/bin/save-replay"
+        "${mainMod}, F10, exec, ${scripts.saveReplay}/bin/save-replay"
       ];
 
       bindm = [

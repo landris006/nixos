@@ -8,7 +8,6 @@
 }: {
   imports = [
     # Include the results of the hardware scan.
-    inputs.home-manager.nixosModules.default
     ./hardware-configuration.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/gaming.nix
@@ -192,6 +191,7 @@
     (flameshot.override {
       enableWlrSupport = true;
     })
+    reaper
     gnome-keyring
     openvpn
     azuredatastudio
@@ -243,7 +243,6 @@
     pkgs.nodePackages."@angular/cli"
     pkgs.nodePackages.nodemon
     playerctl
-    gpu-screen-recorder
     killall
     discord
     pulseaudio
@@ -318,7 +317,12 @@
       xwayland.enable = true;
     };
 
-    gpu-screen-recorder.enable = true; # avoid the prompt when starting pkgs.gpu-screen-recorder
+    gpu-screen-recorder = {
+      enable = true;
+      package = pkgs.gpu-screen-recorder.override {
+        ffmpeg = pkgs.ffmpeg_6; # TODO: remove when gpu-screen-recorder gets updated
+      };
+    }; # avoid the prompt when starting pkgs.gpu-screen-recorder
 
     direnv.enable = true;
 

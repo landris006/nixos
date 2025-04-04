@@ -33,17 +33,14 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    nixos-xivlauncher-rb,
-    ...
-  } @ inputs: {
-    nixosConfigurations.home = nixpkgs.lib.nixosSystem {
+  outputs = inputs: {
+    nixosConfigurations.home = inputs.nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/home/configuration.nix
-        nixos-xivlauncher-rb.nixosModules.default
-        # hyprland.nixosModules.default
+        inputs.home-manager.nixosModules.default
+        inputs.nixos-xivlauncher-rb.nixosModules.default
+        # inputs.hyprland.nixosModules.default
       ];
     };
   };
