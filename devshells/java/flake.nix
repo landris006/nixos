@@ -5,9 +5,9 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     utils,
+    ...
   }:
     utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {inherit system;};
@@ -17,13 +17,7 @@
         buildInputs = with pkgs; [
           java
           maven
-          jetbrains.idea-community
-        ];
-
-        LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-          pkgs.stdenv.cc.cc
-          pkgs.openssl
-          pkgs.linux-pam
+          gradle
         ];
 
         shellHook = ''
