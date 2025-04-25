@@ -6,10 +6,9 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    # plugins = with pkgs.hyprlandPlugins; [
-    #   # hyprspace
-    #   # hyprexpo
-    # ];
+    plugins = with pkgs.hyprlandPlugins; [
+      hyprspace
+    ];
     sourceFirst = false;
     settings = let
       mainMod = "ALT_L";
@@ -139,6 +138,15 @@
         vfr = 0;
       };
 
+      plugin = {
+        # Hyprspace
+        overview = {
+          affectStrut = false;
+          hideRealLayers = false;
+          disableBlur = true;
+        };
+      };
+
       binds = {
         allow_workspace_cycles = false;
       };
@@ -148,6 +156,8 @@
         "${mainMod} CONTROL      , W, killactive"
         "${mainMod}              , V, togglefloating"
         "${mainMod}              , F, fullscreen"
+
+        "${mainMod} CONTROL      , U, overview:toggle"
 
         "${mainMod} CONTROL, T, exec, ${pkgs.alacritty}/bin/alacritty"
         "${mainMod}        , O, exec, ${pkgs.rofi-wayland}/bin/rofi -mode run -show drun"
