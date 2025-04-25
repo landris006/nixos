@@ -28,7 +28,7 @@
         "systemctl --user start hyprpolkitagent"
         "${pkgs.swww}/bin/swww img ~/.config/hypr/wallpapers/city.png --transition-fps 165 --transition-type grow --transition-pos 0.8,0.9"
         "${pkgs.swayosd}/bin/swayosd-server"
-        "${scripts.startReplay}/bin/start-replay"
+        "${scripts.startReplay}"
       ];
 
       input = {
@@ -204,7 +204,7 @@
         "${mainMod} CONTROL, 8, movetoworkspacesilent, 8"
         "${mainMod} CONTROL, 9, movetoworkspacesilent, 9"
 
-        "${mainMod}, F10, exec, ${scripts.saveReplay}/bin/save-replay"
+        "${mainMod}, F10, exec, ${scripts.saveReplay}"
       ];
 
       bindm = [

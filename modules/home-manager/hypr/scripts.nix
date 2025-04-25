@@ -3,7 +3,7 @@
     ffmpeg = pkgs.ffmpeg_6; # TODO: remove when gpu-screen-recorder gets updated
   };
 in rec {
-  startReplay = pkgs.writeShellScriptBin "start-replay" ''
+  startReplay = pkgs.writeShellScript "start-replay" ''
     pidof -q gpu-screen-recorder && exit 0
     video_path="$HOME/Videos/gpu-screen-recorder"
     mkdir -p "$video_path"
@@ -15,9 +15,9 @@ in rec {
       -bm cbr -q 45000 \
       -r 180 \
       -o "$video_path" \
-      -sc ${saveVideo}/bin/save-video
+      -sc ${saveVideo}
   '';
-  saveVideo = pkgs.writeShellScriptBin "save-video" ''
+  saveVideo = pkgs.writeShellScript "save-video" ''
     notify-send -u low -- "GPU Screen Recorder" "Saving replay..."
 
     video_path=$1
@@ -33,7 +33,7 @@ in rec {
 
     notify-send -u low -- "GPU Screen Recorder" "Replay saved to $video_directory/$window_name"
   '';
-  saveReplay = pkgs.writeShellScriptBin "save-replay" ''
+  saveReplay = pkgs.writeShellScript "save-replay" ''
     killall -SIGUSR1 gpu-screen-recorder
   '';
 }
