@@ -8,7 +8,7 @@ in rec {
     video_path="$HOME/Videos/gpu-screen-recorder"
     mkdir -p "$video_path"
     ${gpu-screen-recorder}/bin/gpu-screen-recorder \
-      -w screen \
+      -w DP-1 \
       -f 60 \
       -a "default_output|default_input" \
       -c mkv \
