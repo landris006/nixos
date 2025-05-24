@@ -245,6 +245,7 @@
     playerctl
     killall
     discord
+    vesktop
     pulseaudio
     python312Full
     poetry
@@ -275,7 +276,7 @@
   ];
 
   systemd.user.tmpfiles.rules = [
-    "L %t/discord-ipc-0 - - - - .flatpak/dev.vencord.Vesktop/xdg-run/discord-ipc-0"
+    # "L %t/discord-ipc-0 - - - - .flatpak/dev.vencord.Vesktop/xdg-run/discord-ipc-0"
   ];
 
   virtualisation.docker = {
