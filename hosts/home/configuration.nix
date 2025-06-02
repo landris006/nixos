@@ -49,7 +49,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland];
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk];
   };
 
   hardware.graphics = {
@@ -303,6 +303,7 @@
   };
 
   security = {
+    rtkit.enable = true;
     polkit.enable = true;
     pam.services.sddm = {
       enableGnomeKeyring = true;
