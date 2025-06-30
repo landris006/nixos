@@ -26,7 +26,6 @@
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.swww}/bin/swww init"
         "systemctl --user start hyprpolkitagent"
-        "${pkgs.swww}/bin/swww img ~/.config/hypr/wallpapers/city.png --transition-fps 165 --transition-type grow --transition-pos 0.8,0.9"
         "${pkgs.swayosd}/bin/swayosd-server"
         "${scripts.startReplay}"
       ];
@@ -165,7 +164,7 @@
         "${mainMod}        , N, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
         "${mainMod}        , E, exec, thunar"
         "SUPER        SHIFT, S, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "SUPER             , L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+        "SUPER             , L, exec, IMG=$(cat $(find ~/.cache/swww/ -type f | sort | head -n 1)) ${pkgs.hyprlock}/bin/hyprlock"
 
         # Alt + Tab
         "${mainMod}, tab, focuscurrentorlast"
