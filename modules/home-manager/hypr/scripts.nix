@@ -36,4 +36,42 @@ in rec {
   saveReplay = pkgs.writeShellScript "save-replay" ''
     killall -SIGUSR1 gpu-screen-recorder
   '';
+
+  createConfigFiles = pkgs.writeShellScript "create-config-files" ''
+    file="$HOME/.config/hypr/monitors.conf"
+    if [ ! -f "$file" ]; then
+    cat <<EOF > "$file"
+    # Example configuration:
+
+    # monitor=,preferred,auto-right,1.0
+    # Run nwg-displays to generate config
+    EOF
+    fi
+
+    file="$HOME/.config/hypr/extra.conf"
+    if [ ! -f "$file" ]; then
+    cat <<EOF > "$file"
+    # Example configuration:
+
+    # windowrule = float, class:^(nwg-displays)$
+    EOF
+    fi
+
+    file="$HOME/.config/hypr/workspaces.conf"
+    if [ ! -f "$file" ]; then
+    cat <<EOF > "$file"
+    # Example configuration:
+
+    # workspace = 1, monitor:DP-1,default:true
+    # workspace = 2, monitor:DP-1,
+    # workspace = 3, monitor:DP-1,
+    # workspace = 4, monitor:DP-1,
+    # workspace = 5, monitor:DP-1,
+    # workspace = 6, monitor:DP-2,
+    # workspace = 7, monitor:DP-2,
+    # workspace = 8, monitor:DP-2,
+    # workspace = 9, monitor:DP-2,default:true
+    EOF
+    fi
+  '';
 }

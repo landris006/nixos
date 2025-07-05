@@ -194,6 +194,7 @@
     (flameshot.override {
       enableWlrSupport = true;
     })
+    nwg-displays
     reaper
     gnome-keyring
     vial

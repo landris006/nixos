@@ -16,7 +16,8 @@
     in {
       source = [
         "$HOME/.config/hypr/monitors.conf"
-        "$HOME/.config/hypr/overrides.conf"
+        "$HOME/.config/hypr/workspaces.conf"
+        "$HOME/.config/hypr/extra.conf"
       ];
 
       exec-once = [
@@ -29,6 +30,7 @@
         "${pkgs.networkmanagerapplet}/bin/nm-applet"
         "${pkgs.swayosd}/bin/swayosd-server"
         "${scripts.startReplay}"
+        "${scripts.createConfigFiles}"
       ];
 
       input = {
@@ -62,13 +64,15 @@
 
       decoration = {
         active_opacity = 1;
-        rounding = 2;
+        inactive_opacity = 1;
+
+        rounding = 10;
 
         blur = {
           enabled = true;
           new_optimizations = true;
-          size = 10;
-          passes = 2;
+          size = 5;
+          passes = 5;
         };
 
         shadow = {
