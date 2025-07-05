@@ -20,8 +20,9 @@
       ];
 
       exec-once = [
-        "hyprctl switchxkblayout current next"
         "hyprctl dispatch workspace 1"
+        "systemctl --user start hyprpolkitagent"
+
         "${pkgs.swaynotificationcenter}/bin/swaync -c $HOME/.config/swaync/config.json"
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.swww}/bin/swww init"
@@ -48,9 +49,9 @@
       };
 
       general = {
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 2;
+        gaps_in = 3;
+        gaps_out = 5;
+        border_size = 1;
         "col.active_border" = "rgba(bb9af7ee) rgba(c0caf5ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
 
@@ -145,6 +146,15 @@
           disableBlur = true;
         };
       };
+
+      layerrule = [
+        "blur, rofi"
+        "ignorezero, rofi"
+
+        "blur, waybar"
+        "xray 1, waybar"
+        "ignorezero, waybar"
+      ];
 
       binds = {
         allow_workspace_cycles = false;
