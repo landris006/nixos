@@ -25,7 +25,7 @@
         "${pkgs.swaynotificationcenter}/bin/swaync -c $HOME/.config/swaync/config.json"
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.swww}/bin/swww init"
-        "systemctl --user start hyprpolkitagent"
+        "${pkgs.networkmanagerapplet}/bin/nm-applet"
         "${pkgs.swayosd}/bin/swayosd-server"
         "${scripts.startReplay}"
       ];
