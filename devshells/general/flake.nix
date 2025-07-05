@@ -38,7 +38,7 @@
             fi
             source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
-            export PATH="$PATH:$HOME/src/dbx/moby.scripts"
+            export PATH="$PATH:$HOME/src/dbx/moby.scripts/scripts"
           '';
         };
       }
