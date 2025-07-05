@@ -196,6 +196,8 @@
     })
     reaper
     gnome-keyring
+    vial
+    bc
     openvpn
     azuredatastudio
     swappy
