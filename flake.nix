@@ -43,5 +43,14 @@
         # inputs.hyprland.nixosModules.default
       ];
     };
+    nixosConfigurations.work = inputs.nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/work/configuration.nix
+        inputs.home-manager.nixosModules.default
+        inputs.nixos-xivlauncher-rb.nixosModules.default
+        # inputs.hyprland.nixosModules.default
+      ];
+    };
   };
 }
