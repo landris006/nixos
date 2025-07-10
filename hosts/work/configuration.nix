@@ -57,6 +57,10 @@
     enable32Bit = true;
   };
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
   networking.hostName = "work"; # Define your hostname.
   networking.extraHosts = let
     path = "/etc/extra-hosts";
