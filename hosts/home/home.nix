@@ -1,15 +1,16 @@
-{...}: {
+{username, ...}: {
   imports = [
     ../../modules/home-manager/common.nix
     ../../modules/home-manager/sh.nix
+    ../../modules/home-manager/yazi
     ../../modules/home-manager/theme.nix
     ../../modules/home-manager/hypr/hyprland.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "andris";
-  home.homeDirectory = "/home/andris";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

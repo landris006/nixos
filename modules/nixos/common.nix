@@ -1,8 +1,32 @@
 {
   inputs,
   pkgs,
+  username,
+  hostname,
   ...
 }: {
+  imports = [
+    inputs.home-manager.nixosModules.default
+    inputs.nixos-xivlauncher-rb.nixosModules.default
+    inputs.hosts.nixosModule
+    {
+      networking.stevenBlackHosts = {
+        enable = true;
+        enableIPv6 = true;
+        blockFakenews = true;
+        blockGambling = true;
+        blockPorn = true;
+      };
+    }
+  ];
+
+  networking.hostName = hostname; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Allow unfree packages
@@ -13,10 +37,12 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.supportedFilesystems = ["ntfs"];
 
   hardware.opentabletdriver.enable = true;
+
+  services.dictd.enable = true;
 
   services.pulseaudio.enable = false;
   services.pipewire = {
@@ -28,6 +54,16 @@
     pulse.enable = true;
     jack.enable = true;
     wireplumber.enable = true;
+  };
+
+  services.mpd = {
+    enable = true;
+    extraConfig = ''
+      audio_output {
+          type "pulse"
+          name "PulseAudio"
+        }
+    '';
   };
 
   services.postgresql.enable = true;
@@ -112,7 +148,7 @@
     wayland.enable = true;
     settings = {
       Autologin = {
-        User = "andris";
+        User = username;
         Session = "hyprland";
       };
     };
@@ -136,6 +172,7 @@
     (flameshot.override {
       enableWlrSupport = true;
     })
+    obsidian
     nwg-displays
     reaper
     gnome-keyring
@@ -161,7 +198,6 @@
     alsa-lib
     alsa-utils
     btop
-    cargo
     chromium
     dunst
     eww
@@ -185,7 +221,6 @@
     lz4
     google-chrome
     neofetch
-    neovim
     nodejs
     pavucontrol
     pkgs.nodePackages."@angular/cli"
@@ -203,7 +238,11 @@
     remmina
     ripgrep
     rofi-wayland
+
     rustc
+    cargo
+    rust-analyzer
+
     slurp
     socat
     stow
@@ -263,6 +302,8 @@
       xwayland.enable = true;
     };
 
+    kdeconnect.enable = true;
+
     gpu-screen-recorder = {
       enable = true;
       package = pkgs.gpu-screen-recorder.override {
@@ -290,6 +331,11 @@
     nix-ld.enable = true;
 
     droidcam.enable = true;
+  };
+
+  programs.neovim = {
+    enable = true;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
   };
 
   fonts = {

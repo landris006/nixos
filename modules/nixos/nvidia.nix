@@ -4,14 +4,15 @@
   ...
 }: {
   services.xserver.videoDrivers = ["nvidia"];
+
   boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     DRI_PRIME = "pci-0000_01_00_0";
     __VK_LAYER_NV_optimus = "NVIDIA_only";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    # NVD_BACKEND = "direct";
+    LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
     MOZ_DISABLE_RDD_SANDBOX = "1";
   };
 
@@ -23,6 +24,7 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
     package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
       version = "575.51.02";
       sha256_64bit = "sha256-XZ0N8ISmoAC8p28DrGHk/YN1rJsInJ2dZNL8O+Tuaa0=";

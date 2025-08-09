@@ -34,12 +34,6 @@
   services.blueman.enable = true;
 
   networking.hostName = "work"; # Define your hostname.
-  networking.extraHosts = let
-    path = "/etc/extra-hosts";
-  in
-    if builtins.pathExists path
-    then builtins.readFile path
-    else "";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

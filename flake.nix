@@ -25,6 +25,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hosts = {
+      url = "github:StevenBlack/hosts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
     # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=0f594732b063a90d44df8c5d402d658f27471dfe"; /* 0.43.0 */
 
     more-waita = {
@@ -35,21 +42,23 @@
 
   outputs = inputs: {
     nixosConfigurations.home = inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {
+        inherit inputs;
+        username = "andris";
+        hostname = "home";
+      };
       modules = [
         ./hosts/home/configuration.nix
-        inputs.home-manager.nixosModules.default
-        inputs.nixos-xivlauncher-rb.nixosModules.default
-        # inputs.hyprland.nixosModules.default
       ];
     };
     nixosConfigurations.work = inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {
+        inherit inputs;
+        username = "andris";
+        hostname = "work";
+      };
       modules = [
         ./hosts/work/configuration.nix
-        inputs.home-manager.nixosModules.default
-        inputs.nixos-xivlauncher-rb.nixosModules.default
-        # inputs.hyprland.nixosModules.default
       ];
     };
   };

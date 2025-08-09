@@ -1,0 +1,22 @@
+[mgr]
+keymap = [
+  { on = "u", run = "plugin restore", desc = "Restore last deleted files/folders" },
+  # or use "d + u" like me
+  { on = [
+    "d",
+    "u",
+  ], run = "plugin restore", desc = "Restore last deleted files/folders" },
+
+  # Select files/folders to restore. Input item index or range separated by comma:
+  # - Restore a trashed file:
+  #      What file to restore [0..4]: 4
+  # - Restore multiple trashed files separated by comma, also support range:
+  #      What file to restore [0..3]: 0-2, 3
+
+  # Remove --overwrite if you don't want to overwrite existed files and this will abort restoring when there is existed file.
+  { on = [
+    "d",
+    "U",
+  ], run = "shell --block -- clear && trash-restore --overwrite", desc = "Restore deleted file (Interactive)" },
+  # ... Other keymaps
+]

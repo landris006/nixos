@@ -4,6 +4,8 @@
 {
   pkgs,
   inputs,
+  username,
+  hostname,
   ...
 }: {
   imports = [
@@ -14,19 +16,6 @@
     ../../modules/nixos/common.nix
   ];
 
-  networking.hostName = "home"; # Define your hostname.
-  networking.extraHosts = let
-    path = "/etc/extra-hosts";
-  in
-    if builtins.pathExists path
-    then builtins.readFile path
-    else "";
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # 1. Rule: wakeup fix
   # 2. Rule: hidraw access (keyboard)
   services.udev.extraRules = ''
@@ -34,22 +23,24 @@
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
   '';
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.andris = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "andris";
+    description = username;
     extraGroups = ["networkmanager" "wheel" "audio" "video" "render" "docker"];
-    # packages = with pkgs; [ ];
   };
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+      inherit username;
+      inherit hostname;
+    };
     users = {
-      "andris" = import ./home.nix;
+      "${username}" = import ./home.nix;
     };
     backupFileExtension = "backup";
   };
   services.displayManager.sddm.settings.Autologin = {
-    User = "andris";
+    User = username;
     Session = "hyprland";
   };
 
