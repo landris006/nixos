@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/gaming.nix
+    ../../modules/nixos/spotify.nix
     ../../modules/nixos/common.nix
   ];
 

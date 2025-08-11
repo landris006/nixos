@@ -10,7 +10,6 @@
   # environment.
   home.packages = with pkgs; [
     webcord
-    spotify
   ];
   services.gammastep = {
     enable = true;
