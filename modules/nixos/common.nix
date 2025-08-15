@@ -288,11 +288,17 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
-    pam.services.sddm = {
-      enableGnomeKeyring = true;
+    pam.services = {
+      login.enableGnomeKeyring = true;
+      sddm.enableGnomeKeyring = true;
     };
   };
   services.gnome.gnome-keyring.enable = true;
+  services.dbus.packages = with pkgs; [
+    gnome-keyring
+    gcr
+  ];
+  programs.seahorse.enable = true;
 
   services.tumbler.enable = true; # for thunar thumbnails
 
