@@ -49,7 +49,7 @@ in rec {
     # Run nwg-displays to generate config
     EOF
 
-    hyprctl reload config-only
+    should_reload = true
     fi
 
     file="$HOME/.config/hypr/extra.conf"
@@ -60,7 +60,7 @@ in rec {
     # windowrule = float, class:^(nwg-displays)$
     EOF
 
-    hyprctl reload config-only
+    should_reload = true
     fi
 
     file="$HOME/.config/hypr/workspaces.conf"
@@ -79,7 +79,12 @@ in rec {
     # workspace = 9, monitor:DP-2,default:true
     EOF
 
-    hyprctl reload config-only
+    should_reload = true
+    fi
+
+    if [ "$should_reload" = true ]; then
+      notify-send -u low -- "Created missing Hyprland config files" "Reloading config..."
+      hyprctl reload config-only
     fi
   '';
 }
