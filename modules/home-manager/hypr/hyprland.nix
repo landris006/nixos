@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     hyprpolkitagent
   ];
@@ -11,7 +7,7 @@
     enable = true;
     xwayland.enable = true;
     plugins = [
-      inputs.hyprchroma.packages.${pkgs.system}.default
+      # inputs.hyprchroma.packages.${pkgs.system}.default
     ];
     sourceFirst = false;
     settings = let

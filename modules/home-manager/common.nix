@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  imports = [
+    # inputs.caelestia.homeManagerModules.default
+  ];
+
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -22,6 +26,9 @@
       night = 4500;
     };
   };
+
+  # programs.caelestia.enable = false;
+  # programs.caelestia.cli.enable = config.programs.caelestia.enable;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
