@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = with pkgs; [
     hyprpolkitagent
   ];
@@ -6,8 +10,8 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    plugins = with pkgs.hyprlandPlugins; [
-      hyprspace
+    plugins = [
+      inputs.hyprchroma.packages.${pkgs.system}.default
     ];
     sourceFirst = false;
     settings = let
@@ -26,7 +30,7 @@
 
         "${pkgs.swaynotificationcenter}/bin/swaync -c $HOME/.config/swaync/config.json"
         "${pkgs.waybar}/bin/waybar"
-        "${pkgs.swww}/bin/swww init"
+        "${pkgs.swww}/bin/swww-daemon && swww img $(cat $HOME/.cache/current-wallpaper)"
         "${pkgs.networkmanagerapplet}/bin/nm-applet"
         "${pkgs.swayosd}/bin/swayosd-server"
         "${scripts.startReplay}"
@@ -137,14 +141,7 @@
         vfr = 0;
       };
 
-      plugin = {
-        # Hyprspace
-        overview = {
-          affectStrut = false;
-          hideRealLayers = false;
-          disableBlur = true;
-        };
-      };
+      plugin = {};
 
       layerrule = [
         "blur, rofi"
@@ -165,15 +162,13 @@
         "${mainMod}              , V, togglefloating"
         "${mainMod}              , F, fullscreen"
 
-        "${mainMod} CONTROL      , U, overview:toggle"
-
         "${mainMod} CONTROL, T, exec, ${pkgs.alacritty}/bin/alacritty"
         "${mainMod}        , O, exec, ${pkgs.rofi-wayland}/bin/rofi -mode run -show drun"
         "${mainMod}        , P, exec, ${pkgs.rofi-wayland}/bin/rofi -show window"
         "${mainMod}        , N, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
         "${mainMod}        , E, exec, thunar"
         "SUPER        SHIFT, S, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "SUPER             , L, exec, IMG=$(cat $(find ~/.cache/swww/ -type f | sort | head -n 1)) ${pkgs.hyprlock}/bin/hyprlock"
+        "SUPER             , L, exec, IMG=$(cat $HOME/.cache/current-wallpaper) ${pkgs.hyprlock}/bin/hyprlock"
 
         # Alt + Tab
         "${mainMod}, tab, focuscurrentorlast"
