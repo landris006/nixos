@@ -69,5 +69,15 @@
         ./hosts/work/configuration.nix
       ];
     };
+    nixosConfigurations.nova = inputs.nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs;
+        username = "andris";
+        hostname = "nova";
+      };
+      modules = [
+        ./hosts/nova/configuration.nix
+      ];
+    };
   };
 }
