@@ -38,6 +38,8 @@ in rec {
   '';
 
   createConfigFiles = pkgs.writeShellScript "create-config-files" ''
+    should_reload = false
+
     file="$HOME/.config/hypr/monitors.conf"
     if [ ! -f "$file" ]; then
     cat <<EOF > "$file"
@@ -46,6 +48,8 @@ in rec {
     # monitor=,preferred,auto-right,1.0
     # Run nwg-displays to generate config
     EOF
+
+    hyprctl reload config-only
     fi
 
     file="$HOME/.config/hypr/extra.conf"
@@ -55,6 +59,8 @@ in rec {
 
     # windowrule = float, class:^(nwg-displays)$
     EOF
+
+    hyprctl reload config-only
     fi
 
     file="$HOME/.config/hypr/workspaces.conf"
@@ -72,6 +78,8 @@ in rec {
     # workspace = 8, monitor:DP-2,
     # workspace = 9, monitor:DP-2,default:true
     EOF
+
+    hyprctl reload config-only
     fi
   '';
 }
