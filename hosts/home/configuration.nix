@@ -11,11 +11,14 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/nixos/ssd.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/spotify.nix
     ../../modules/nixos/common.nix
   ];
+
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   # 1. Rule: wakeup fix
   # 2. Rule: hidraw access (keyboard)

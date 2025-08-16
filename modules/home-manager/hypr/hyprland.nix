@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     hyprpolkitagent
+    hypridle
+    brightnessctl
   ];
 
   wayland.windowManager.hyprland = {
@@ -24,6 +26,7 @@
         "hyprctl dispatch workspace 1"
         "systemctl --user start hyprpolkitagent"
 
+        "${pkgs.hypridle}/bin/hypridle"
         "${pkgs.swaynotificationcenter}/bin/swaync -c $HOME/.config/swaync/config.json"
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.swww}/bin/swww-daemon && swww img $(cat $HOME/.cache/current-wallpaper)"

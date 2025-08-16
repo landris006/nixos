@@ -5,9 +5,11 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/nixos/ssd.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/spotify.nix
+    ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/common.nix
   ];
 
@@ -29,10 +31,6 @@
     User = "andris";
     Session = "hyprland";
   };
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
 
   networking.hostName = "work"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

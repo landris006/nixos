@@ -37,13 +37,15 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.supportedFilesystems = ["ntfs"];
+
+  hardware.enableRedistributableFirmware = true;
 
   hardware.opentabletdriver.enable = true;
 
   services.dictd.enable = true;
 
+  security.rtkit.enable = true;
   services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
@@ -143,13 +145,22 @@
 
   environment.pathsToLink = ["/libexec"];
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    settings = {
-      Autologin = {
-        User = username;
-        Session = "hyprland";
+  services.displayManager = {
+    autoLogin = {
+      enable = true;
+      user = username;
+    };
+    gdm = {
+      enable = true;
+    };
+    sddm = {
+      enable = false;
+      wayland.enable = true;
+      settings = {
+        Autologin = {
+          User = username;
+          Session = "hyprland";
+        };
       };
     };
   };
@@ -286,13 +297,15 @@
   };
 
   security = {
-    rtkit.enable = true;
     polkit.enable = true;
     pam.services = {
       login.enableGnomeKeyring = true;
       sddm.enableGnomeKeyring = true;
     };
   };
+
+  services.printing.enable = true;
+
   services.gnome.gnome-keyring.enable = true;
   services.dbus.packages = with pkgs; [
     gnome-keyring
