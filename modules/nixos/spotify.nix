@@ -13,12 +13,7 @@
     enable = true;
     theme = spicePkgs.themes.catppuccin;
     colorScheme = "mocha";
-    enabledCustomApps = with spicePkgs.apps; [
-      newReleases
-      reddit
-      lyricsPlus
-      marketplace
-    ];
+    # enabledCustomApps = with spicePkgs.apps; [];
     # theme = {
     #   name = "Tokyo Night";
     #   src = pkgs.fetchFromGitHub {
