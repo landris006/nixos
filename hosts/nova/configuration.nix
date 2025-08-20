@@ -5,6 +5,7 @@
   inputs,
   username,
   hostname,
+  pkgs,
   ...
 }: {
   imports = [
@@ -18,12 +19,44 @@
     ../../modules/nixos/common.nix
   ];
 
+  # needs `loginctl enable-linger <username>`
+  systemd.services.set-refresh-rate = {
+    description = "Sets refresh rate based on power source";
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "set-refresh-rate" ''
+        MONITOR="desc:EDO EF10QBC64.A"
+
+        # TODO: make it only affect refresh rate (remember scale, resolution, etc.)
+        REFRESH=60.0
+        if ${pkgs.gnugrep}/bin/grep -q "Discharging" /sys/class/power_supply/BAT0/status; then
+            REFRESH=60.0
+        else
+            REFRESH=165.0
+        fi
+
+        for dir in /run/user/*; do
+          for hypr_dir in "$dir/hypr/"*/; do
+            socket="$hypr_dir.socket.sock"
+            if [[ -S $socket ]]; then
+              echo -e "keyword monitor $MONITOR,2560x1600@$REFRESH,0x0,1.33" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
+            fi
+          done
+        done
+      '';
+    };
+  };
+
   # 1. Rule: wakeup fix
   # 2. Rule: hidraw access (keyboard)
 
   # ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x149c", ATTR{power/wakeup}="disabled"
   services.udev.extraRules = ''
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+
+    SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", TAG+="systemd", ENV{SYSTEMD_WANTS}="set-refresh-rate.service"
+    SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", TAG+="systemd", ENV{SYSTEMD_WANTS}="set-refresh-rate.service"
   '';
 
   services.tlp.enable = true;
