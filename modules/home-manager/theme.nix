@@ -1,19 +1,25 @@
 {pkgs, ...}: let
   cursor-theme = {
     name = "Bibata-Modern-Classic";
+    size = 24;
     package = pkgs.bibata-cursors;
   };
 in {
   home = {
     sessionVariables = {
+      HYPRCURSOR_THEME = cursor-theme.name;
+      HYPRCURSOR_SIZE = cursor-theme.size;
+
+      # Not used on Hyprland, HYPRCURSOR values takes precedence
       XCURSOR_THEME = cursor-theme.name;
-      XCURSOR_SIZE = "24";
+      XCURSOR_SIZE = cursor-theme.size;
     };
     pointerCursor = {
       name = cursor-theme.name;
       package = cursor-theme.package;
-      size = 24;
+      size = cursor-theme.size;
       gtk.enable = true;
+      hyprcursor.enable = true;
     };
   };
 
