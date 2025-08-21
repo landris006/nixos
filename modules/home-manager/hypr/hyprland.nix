@@ -8,9 +8,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    plugins = [
-      # inputs.hyprchroma.packages.${pkgs.system}.default
-    ];
+    plugins = [];
     sourceFirst = false;
     settings = let
       mainMod = "ALT_L";
