@@ -180,6 +180,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    inputs.quickshell.packages.${pkgs.system}.default
+    qt6.qtdeclarative
+    qt6.qttools
+
     (flameshot.override {
       enableWlrSupport = true;
     })
