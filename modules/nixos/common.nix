@@ -178,6 +178,21 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    (
+      writeTextFile {
+        name = "Rofi Wallpaper Selector";
+        destination = "/share/applications/wallpaper.desktop";
+        text = ''
+          [Desktop Entry]
+          Name=Wallpaper Selector
+          Comment=Select a wallpaper
+          Exec=/home/andris/.config/rofi/wall.sh
+          Terminal=false
+          Type=Application
+          Categories=Utility;
+        '';
+      }
+    )
     (flameshot.override {
       enableWlrSupport = true;
     })
