@@ -41,8 +41,6 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  hardware.opentabletdriver.enable = true;
-
   services.dictd.enable = true;
 
   security.rtkit.enable = true;
@@ -54,19 +52,19 @@
       support32Bit = true;
     };
     pulse.enable = true;
-    jack.enable = true;
-    wireplumber.enable = true;
+    # jack.enable = true;
+    # wireplumber.enable = true;
   };
 
-  services.mpd = {
-    enable = true;
-    extraConfig = ''
-      audio_output {
-          type "pulse"
-          name "PulseAudio"
-        }
-    '';
-  };
+  # services.mpd = {
+  #   enable = true;
+  #   extraConfig = ''
+  #     audio_output {
+  #         type "pulse"
+  #         name "PulseAudio"
+  #       }
+  #   '';
+  # };
 
   services.postgresql.enable = true;
 
@@ -227,7 +225,6 @@
     hyprshot
     inotify-tools
     jq
-    krita
     libnotify
     lz4
     google-chrome
