@@ -348,8 +348,6 @@
     dconf.enable = true;
 
     nix-ld.enable = true;
-
-    droidcam.enable = true;
   };
 
   programs.neovim = {

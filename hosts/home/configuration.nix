@@ -21,6 +21,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
+  programs.droidcam.enable = true;
+
   # 1. Rule: wakeup fix
   # 2. Rule: hidraw access (keyboard)
   services.udev.extraRules = ''
