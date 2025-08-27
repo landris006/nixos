@@ -16,6 +16,7 @@
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/spotify.nix
     ../../modules/nixos/common.nix
+    ../../modules/nixos/draw.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;

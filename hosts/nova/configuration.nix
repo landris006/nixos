@@ -15,6 +15,7 @@
     ../../modules/nixos/amd.nix
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/spotify.nix
+    ../../modules/nixos/draw.nix
     ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/common.nix
   ];
