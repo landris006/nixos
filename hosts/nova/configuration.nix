@@ -7,7 +7,32 @@
   hostname,
   pkgs,
   ...
-}: {
+}: let
+  updateRefreshRate = pkgs.writeShellScriptBin "update-refresh-rate" ''
+    MONITOR="EDO EF10QBC64.A"
+
+    # TODO: make it only affect refresh rate (remember scale, resolution, etc.)
+    REFRESH=60.00000
+    ANIMATIONS=false
+    if [ "$(</sys/class/power_supply/ADP1/device/power_supply/ADP1/online)" -eq 0 ]; then
+        REFRESH=60.00000
+        ANIMATIONS=false
+    else
+        REFRESH=165.00000
+        ANIMATIONS=true
+    fi
+
+    for dir in /run/user/*; do
+      for hypr_dir in "$dir/hypr/"*/; do
+        socket="$hypr_dir.socket.sock"
+        if [[ -S $socket ]]; then
+          echo -e "keyword monitor desc:$MONITOR,2560x1600@$REFRESH,0x0,1.33" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
+          echo -e "keyword animations:enabled $ANIMATIONS" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
+        fi
+      done
+    done
+  '';
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -20,32 +45,17 @@
     ../../modules/nixos/common.nix
   ];
 
+  environment.systemPackages = [
+    updateRefreshRate
+  ];
+
   # needs `loginctl enable-linger <username>`
   systemd.services.set-refresh-rate = {
     description = "Sets refresh rate based on power source";
 
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "set-refresh-rate" ''
-        MONITOR="desc:EDO EF10QBC64.A"
-
-        # TODO: make it only affect refresh rate (remember scale, resolution, etc.)
-        REFRESH=60.0
-        if ${pkgs.gnugrep}/bin/grep -q "Discharging" /sys/class/power_supply/BAT0/status; then
-            REFRESH=60.0
-        else
-            REFRESH=165.0
-        fi
-
-        for dir in /run/user/*; do
-          for hypr_dir in "$dir/hypr/"*/; do
-            socket="$hypr_dir.socket.sock"
-            if [[ -S $socket ]]; then
-              echo -e "keyword monitor $MONITOR,2560x1600@$REFRESH,0x0,1.33" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
-            fi
-          done
-        done
-      '';
+      ExecStart = "${updateRefreshRate}/bin/update-refresh-rate";
     };
   };
 
