@@ -74,22 +74,10 @@ in {
   services.tlp = {
     enable = true;
     settings = {
-      SOUND_POWER_SAVE_ON_AC = "0";
-      SOUND_POWER_SAVE_ON_BAT = "0";
-      SOUND_POWER_SAVE_CONTROLLER = "N";
-
-      # Charging stops at this percentage
-      STOP_CHARGE_THRESH_BAT0 = 80;
-
-      # Charging starts at this percentage (e.g., 75% so it charges from 75% to 80%)
-      START_CHARGE_THRESH_BAT0 = 75;
+      START_CHARGE_THRESH_BAT0 = 0;
+      STOP_CHARGE_THRESH_BAT0 = 1;
     };
   };
-
-  # boot.extraModprobeConfig = ''
-  #   options snd-intel-dspcfg dsp_driver=1
-  #   options snd-hda-intel model=ideapad
-  # '';
 
   users.users.${username} = {
     isNormalUser = true;
