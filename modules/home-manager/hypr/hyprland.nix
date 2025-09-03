@@ -3,6 +3,7 @@
     hyprpolkitagent
     hypridle
     brightnessctl
+    kanshi
   ];
 
   wayland.windowManager.hyprland = {
@@ -23,6 +24,8 @@
       exec-once = [
         "hyprctl dispatch workspace 1"
         "systemctl --user start hyprpolkitagent"
+
+        "${pkgs.kanshi}/bin/kanshi"
 
         "${pkgs.hypridle}/bin/hypridle"
         "${pkgs.swaynotificationcenter}/bin/swaync -c $HOME/.config/swaync/config.json"
