@@ -35,7 +35,7 @@
       ];
 
       input = {
-        kb_layout = "us,hu";
+        kb_layout = "hu";
         kb_variant = "";
         kb_model = "";
         kb_options = "grp:alt_space_toggle";
@@ -47,8 +47,14 @@
         accel_profile = "flat";
 
         touchpad = {
-          natural_scroll = "no";
+          natural_scroll = true;
+          scroll_factor = 0.3;
         };
+      };
+
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_cancel_ratio = 0.15;
       };
 
       general = {
@@ -121,11 +127,6 @@
         no_hardware_cursors = true;
       };
 
-      gestures = {
-        # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        workspace_swipe = false;
-      };
-
       xwayland = {
         force_zero_scaling = true;
       };
@@ -139,15 +140,6 @@
       };
 
       plugin = {};
-
-      layerrule = [
-        "blur, rofi"
-        "ignorezero, rofi"
-
-        "blur, waybar"
-        "xray 1, waybar"
-        "ignorezero, waybar"
-      ];
 
       binds = {
         allow_workspace_cycles = false;
@@ -223,6 +215,28 @@
         ",XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
         ",XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next "
         ",XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+      ];
+
+      windowrule = [
+        "float, class:^(nwg-displays)$"
+        "float, initialTitle:^(Slack – Huddle)$"
+        "float, initialTitle:^(Bluetooth Devices)$"
+        "float, initialTitle:^(overskride)$"
+        "float, class:thunar, title:Rename.*"
+        "float, class:org.gnome.FileRoller"
+        "float, class:nm-connection-editor"
+
+        "size 940 550, class:^(org.pulseaudio.pavucontrol)$"
+        "float, class:^(org.pulseaudio.pavucontrol)$"
+      ];
+
+      layerrule = [
+        "blur, rofi"
+        "ignorezero, rofi"
+
+        "blur, waybar"
+        "xray 1, waybar"
+        "ignorezero, waybar"
       ];
     };
   };
