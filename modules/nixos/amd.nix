@@ -1,12 +1,12 @@
-{lib, ...}: {
+{...}: {
   config = {
-    services.xserver.videoDrivers = lib.mkDefault ["modesetting"];
+    services.xserver.videoDrivers = ["modesetting"];
 
     hardware.graphics = {
-      enable = lib.mkDefault true;
-      enable32Bit = lib.mkDefault true;
+      enable = true;
+      enable32Bit = true;
     };
 
-    hardware.amdgpu.initrd.enable = lib.mkDefault true;
+    hardware.amdgpu.initrd.enable = true;
   };
 }

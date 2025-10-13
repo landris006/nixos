@@ -9,25 +9,27 @@
   ...
 }: let
   updateRefreshRate = pkgs.writeShellScriptBin "update-refresh-rate" ''
-    MONITOR="EDO EF10QBC64.A"
+    MONITOR="eDP-1"
 
     # TODO: make it only affect refresh rate (remember scale, resolution, etc.)
     REFRESH=60.00000
-    ANIMATIONS=false
+    PRETTY=false
     if [ "$(</sys/class/power_supply/ADP1/device/power_supply/ADP1/online)" -eq 0 ]; then
         REFRESH=60.00000
-        ANIMATIONS=false
+        PRETTY=false
     else
         REFRESH=165.00000
-        ANIMATIONS=true
+        PRETTY=true
     fi
 
     for dir in /run/user/*; do
       for hypr_dir in "$dir/hypr/"*/; do
         socket="$hypr_dir.socket.sock"
         if [[ -S $socket ]]; then
-          echo -e "keyword monitor desc:$MONITOR,2560x1600@$REFRESH,0x0,1.33" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
-          echo -e "keyword animations:enabled $ANIMATIONS" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
+          echo -e "keyword monitor $MONITOR,2560x1600@$REFRESH,0x0,1.25" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
+
+          echo -e "keyword animations:enabled $PRETTY" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
+          echo -e "keyword decoration:shadow:enabled $PRETTY" | ${pkgs.socat}/bin/socat - UNIX-CONNECT:"$socket"
         fi
       done
     done
@@ -44,6 +46,8 @@ in {
     ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/common.nix
   ];
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   environment.systemPackages = [
     updateRefreshRate

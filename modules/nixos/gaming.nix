@@ -58,6 +58,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    steamtinkerlaunch
+    protontricks
     lutris
     (xivlauncher-rb.override {
       useGameMode = true;

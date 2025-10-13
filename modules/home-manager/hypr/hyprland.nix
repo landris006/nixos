@@ -3,7 +3,7 @@
     hyprpolkitagent
     hypridle
     brightnessctl
-    kanshi
+    # kanshi
   ];
 
   wayland.windowManager.hyprland = {
@@ -25,7 +25,7 @@
         "hyprctl dispatch workspace 1"
         "systemctl --user start hyprpolkitagent"
 
-        "${pkgs.kanshi}/bin/kanshi"
+        # "${pkgs.kanshi}/bin/kanshi"
 
         "${pkgs.hypridle}/bin/hypridle"
         "${pkgs.swaynotificationcenter}/bin/swaync -c $HOME/.config/swaync/config.json"
@@ -56,7 +56,6 @@
       };
 
       gestures = {
-        workspace_swipe = true;
         workspace_swipe_cancel_ratio = 0.15;
       };
 
@@ -86,7 +85,7 @@
         };
 
         shadow = {
-          enabled = 1;
+          enabled = true;
           range = 4;
           render_power = 3;
           color = "rgba(1a1a1aee)";
@@ -138,8 +137,8 @@
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         disable_splash_rendering = true;
         disable_hyprland_logo = true;
-        vrr = 1;
-        vfr = 0;
+        # vrr = 1;
+        # vfr = 0;
       };
 
       plugin = {};
@@ -155,8 +154,8 @@
         "${mainMod}              , F, fullscreen"
 
         "${mainMod} CONTROL, T, exec, ${pkgs.alacritty}/bin/alacritty"
-        "${mainMod}        , O, exec, ${pkgs.rofi-wayland}/bin/rofi -mode run -show drun"
-        "${mainMod}        , P, exec, ${pkgs.rofi-wayland}/bin/rofi -show window"
+        "${mainMod}        , O, exec, ${pkgs.rofi}/bin/rofi -mode run -show drun"
+        "${mainMod}        , P, exec, ${pkgs.rofi}/bin/rofi -show window"
         "${mainMod}        , N, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
         "${mainMod}        , E, exec, thunar"
         "SUPER        SHIFT, S, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"

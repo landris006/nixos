@@ -20,7 +20,7 @@
     }
   ];
 
-  nix.trustedUsers = ["root" "@wheel"];
+  nix.settings.trusted-users = ["root" "@wheel"];
 
   networking.hostName = hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -131,7 +131,7 @@
 
   services.displayManager = {
     autoLogin = {
-      enable = true;
+      enable = false;
       user = username;
     };
     gdm = {
@@ -165,21 +165,18 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     (
-      writeTextFile {
+      makeDesktopItem {
         name = "Rofi Wallpaper Selector";
-        destination = "/share/applications/wallpaper.desktop";
-        text = ''
-          [Desktop Entry]
-          Name=Wallpaper Selector
-          Comment=Select a wallpaper
-          Exec=/home/andris/.config/rofi/wall.sh
-          Terminal=false
-          Type=Application
-          Categories=Utility;
-        '';
+        desktopName = "Wallpaper Selector";
+        comment = "Select a wallpaper";
+        exec = "/home/andris/.config/rofi/wall.sh";
+        terminal = false;
+        type = "Application";
+        categories = ["Utility"];
       }
     )
     eog
+    fd
     (flameshot.override {
       enableWlrSupport = true;
     })
@@ -240,14 +237,15 @@
     discord
     vesktop
     pulseaudio
-    python312Full
+    python3
     poetry
     qt5.qtwayland
     libsForQt5.kio
     qt6.qtwayland
     remmina
     ripgrep
-    rofi-wayland
+    rofi
+    mangohud
 
     rustc
     cargo
