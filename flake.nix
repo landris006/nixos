@@ -40,11 +40,6 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    more-waita = {
-      url = "github:somepaulo/MoreWaita";
-      flake = false;
-    };
-
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     librepods = {
