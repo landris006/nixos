@@ -4,6 +4,7 @@
     ../../modules/home-manager/sh.nix
     ../../modules/home-manager/theme.nix
     ../../modules/home-manager/hypr/hyprland.nix
+    ../../modules/home-manager/kicad.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
