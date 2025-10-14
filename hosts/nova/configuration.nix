@@ -47,7 +47,9 @@ in {
     ../../modules/nixos/common.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # AMD freeze workaround
+  boot.kernelPackages = pkgs.linuxPackages_6_6;
 
   environment.systemPackages = [
     updateRefreshRate
