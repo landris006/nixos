@@ -44,7 +44,6 @@ in {
         variant = "mocha";
       };
     };
-    cursorTheme = cursor-theme;
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.catppuccin-papirus-folders.override {
@@ -52,5 +51,6 @@ in {
         accent = "lavender";
       };
     };
+    cursorTheme = cursor-theme;
   };
 }
