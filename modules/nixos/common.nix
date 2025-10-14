@@ -166,6 +166,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    arduino-ide
+    inputs.librepods.packages.${pkgs.system}.default
+    bluez
     (
       makeDesktopItem {
         name = "Rofi Wallpaper Selector";
