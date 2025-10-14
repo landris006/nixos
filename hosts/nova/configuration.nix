@@ -86,7 +86,7 @@ in {
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    extraGroups = ["networkmanager" "wheel" "audio" "video" "render" "docker"];
+    extraGroups = ["networkmanager" "wheel" "audio" "video" "render" "docker" "dialout" "plugdev"];
   };
   home-manager = {
     extraSpecialArgs = {
