@@ -43,7 +43,7 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     librepods = {
-      url = "path:/home/andris/nixos/vendor/librepods";
+      url = "github:landris006/librepods";
     };
   };
 

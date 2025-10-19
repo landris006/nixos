@@ -540,29 +540,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1760374095,
-        "narHash": "sha256-wEkBG3rxni/yt2zXuf33vFCJ9mQGBTmAvqRaXCdTf2E=",
-        "path": "/home/andris/nixos/vendor/librepods",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/andris/nixos/vendor/librepods",
-        "type": "path"
-      }
-    },
-    "more-waita": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1759113322,
-        "narHash": "sha256-Wx6snFYlK1rpENGgheCeebzWTYsXLcHS+JMb+bA9jO4=",
-        "owner": "somepaulo",
-        "repo": "MoreWaita",
-        "rev": "9ee5313aab509731ca2c851186e350a255461447",
+        "lastModified": 1760481987,
+        "narHash": "sha256-EYA2crndoBtphxlLNqF+qlyILj1NGuQXLP8qnwL4ks4=",
+        "owner": "landris006",
+        "repo": "librepods",
+        "rev": "4df8be791504dc65ed49eafbf4687840f3839209",
         "type": "github"
       },
       "original": {
-        "owner": "somepaulo",
-        "repo": "MoreWaita",
+        "owner": "landris006",
+        "repo": "librepods",
         "type": "github"
       }
     },
@@ -818,7 +805,6 @@
         "hosts": "hosts",
         "hyprchroma": "hyprchroma",
         "librepods": "librepods",
-        "more-waita": "more-waita",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-gaming": "nix-gaming",
         "nixos-xivlauncher-rb": "nixos-xivlauncher-rb",
