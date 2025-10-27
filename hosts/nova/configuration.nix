@@ -49,7 +49,7 @@ in {
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   # AMD freeze workaround
-  boot.kernelPackages = pkgs.linuxPackages_6_6;
+  boot.kernelPackages = pkgs.linuxPackages_6_17;
 
   environment.systemPackages = [
     updateRefreshRate
