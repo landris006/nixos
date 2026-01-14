@@ -41,6 +41,7 @@ in {
     ../../modules/nixos/ssd.nix
     ../../modules/nixos/amd.nix
     ../../modules/nixos/gaming.nix
+    ../../modules/nixos/nordvpn.nix
     ../../modules/nixos/spotify.nix
     ../../modules/nixos/draw.nix
     ../../modules/nixos/bluetooth.nix
