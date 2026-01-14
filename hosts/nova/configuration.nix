@@ -77,15 +77,6 @@ in {
     SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", TAG+="systemd", ENV{SYSTEMD_WANTS}="set-refresh-rate.service"
   '';
 
-  # TODO:
-  services.tlp = {
-    enable = true;
-    settings = {
-      START_CHARGE_THRESH_BAT0 = 0;
-      STOP_CHARGE_THRESH_BAT0 = 1;
-    };
-  };
-
   users.users.${username} = {
     isNormalUser = true;
     description = username;
