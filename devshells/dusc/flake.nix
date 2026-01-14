@@ -19,8 +19,8 @@
           gcc-arm-embedded
           openocd
           gdb
-          clang
-          # cpplint
+
+          clang-tools
         ];
 
         shellHook = ''
