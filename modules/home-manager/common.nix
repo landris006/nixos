@@ -12,9 +12,8 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    webcord
-  ];
+  home.packages = with pkgs; [];
+
   services.gammastep = {
     enable = true;
     tray = true;
