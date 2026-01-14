@@ -8,16 +8,6 @@
   imports = [
     inputs.home-manager.nixosModules.default
     inputs.nixos-xivlauncher-rb.nixosModules.default
-    inputs.hosts.nixosModule
-    {
-      networking.stevenBlackHosts = {
-        enable = true;
-        enableIPv6 = true;
-        blockFakenews = true;
-        blockGambling = true;
-        blockPorn = true;
-      };
-    }
   ];
 
   nix.settings.trusted-users = ["root" "@wheel"];
