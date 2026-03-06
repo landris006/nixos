@@ -4,32 +4,52 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = {
+    nixpkgs,
+    flake-utils,
+    ...
+  }:
     flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
+    (
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+
+        vulkan-sdk = pkgs.symlinkJoin {
+          name = "vulkan-sdk";
+          paths = with pkgs; [
+            vulkan-headers
+            vulkan-loader
+            vulkan-tools
+            vulkan-validation-layers
+            shaderc
+            shaderc.static
+            glslang
+          ];
+        };
+      in
         with pkgs; {
-          devShells.default = mkShell.override { stdenv = gcc14Stdenv; }
+          devShells.default =
+            mkShell.override {stdenv = gcc14Stdenv;}
             rec {
               buildInputs = [
+                pkg-config
                 gcc14
                 clang-tools
-                cpplint
+                tbb
 
-                bear
+                slang
+
+                cmake
+                neocmakelsp
+                cmake-lint
+
+                gdb
 
                 renderdoc
 
-                # udev
-                # alsa-lib
-                # glslang
+                vulkan-sdk
+                vulkan-utility-libraries
                 shaderc
-                vulkan-headers
-                vulkan-loader
-                vulkan-tools
-                vulkan-validation-layers
 
                 glfw
                 glm
@@ -39,17 +59,19 @@
 
                 wayland
 
-                xorg.libXcursor
-                xorg.libXrandr
-                xorg.libXi
-                xorg.libX11
-                xorg.libXxf86vm
+                libxcursor
+                libxrandr
+                libxi
+                libx11
+                libxxf86vm
+                libxinerama
+                libxcb
               ];
 
-              VULKAN_SDK = "${vulkan-headers}";
+              VULKAN_SDK = "${vulkan-sdk}";
               VK_LAYER_PATH = "${vulkan-validation-layers}/share/vulkan/explicit_layer.d";
               LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}";
             };
         }
-      );
+    );
 }
