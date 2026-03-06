@@ -59,14 +59,14 @@ in {
   ];
 
   # needs `loginctl enable-linger <username>`
-  systemd.services.set-refresh-rate = {
-    description = "Sets refresh rate based on power source";
-
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${updateRefreshRate}/bin/update-refresh-rate";
-    };
-  };
+  # systemd.services.set-refresh-rate = {
+  #   description = "Sets refresh rate based on power source";
+  #
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     ExecStart = "${updateRefreshRate}/bin/update-refresh-rate";
+  #   };
+  # };
 
   # 1. Rule: wakeup fix
   # 2. Rule: hidraw access (keyboard)
