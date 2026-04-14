@@ -157,6 +157,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     arduino-ide
+    claude-code
     inputs.librepods.packages.${pkgs.system}.default
     bluez
     (
@@ -222,10 +223,9 @@
     libnotify
     lz4
     google-chrome
-    neofetch
+    fastfetch
     nodejs
     pavucontrol
-    pkgs.nodePackages."@angular/cli"
     pkgs.nodePackages.nodemon
     playerctl
     killall

@@ -37,7 +37,7 @@
                 clang-tools
                 tbb
 
-                slang
+                shader-slang
 
                 cmake
                 neocmakelsp

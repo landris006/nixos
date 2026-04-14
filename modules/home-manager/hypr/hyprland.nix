@@ -220,25 +220,16 @@
       ];
 
       windowrule = [
-        "float, class:^(nwg-displays)$"
-        "float, initialTitle:^(Slack – Huddle)$"
-        "float, initialTitle:^(Bluetooth Devices)$"
-        "float, initialTitle:^(overskride)$"
-        "float, class:thunar, title:Rename.*"
-        "float, class:org.gnome.FileRoller"
-        "float, class:nm-connection-editor"
+        "float on, match:class ^(nwg-displays)$"
+        "float on, match:initial_title ^(Slack – Huddle)$"
+        "float on, match:initial_title ^(Bluetooth Devices)$"
+        "float on, match:initial_title ^(overskride)$"
+        "float on, match:class thunar, match:title Rename.*"
+        "float on, match:class org.gnome.FileRoller"
+        "float on, match:class nm-connection-editor"
 
-        "size 940 550, class:^(org.pulseaudio.pavucontrol)$"
-        "float, class:^(org.pulseaudio.pavucontrol)$"
-      ];
-
-      layerrule = [
-        "blur, rofi"
-        "ignorezero, rofi"
-
-        "blur, waybar"
-        "xray 1, waybar"
-        "ignorezero, waybar"
+        "size 940 550, match:class ^(org.pulseaudio.pavucontrol)$"
+        "float on, match:class ^(org.pulseaudio.pavucontrol)$"
       ];
     };
   };
