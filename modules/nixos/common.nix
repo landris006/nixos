@@ -158,6 +158,7 @@
   environment.systemPackages = with pkgs; [
     arduino-ide
     claude-code
+    appimage-run
     inputs.librepods.packages.${pkgs.system}.default
     bluez
     (
