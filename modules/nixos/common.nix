@@ -31,6 +31,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["ntfs"];
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
   hardware.enableRedistributableFirmware = true;
 
   services.dictd.enable = true;
