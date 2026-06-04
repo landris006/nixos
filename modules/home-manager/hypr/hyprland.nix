@@ -8,6 +8,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     xwayland.enable = true;
     plugins = [];
     sourceFirst = false;
@@ -30,7 +31,7 @@
         "${pkgs.hypridle}/bin/hypridle"
         "${pkgs.swaynotificationcenter}/bin/swaync -c $HOME/.config/swaync/config.json"
         "${pkgs.waybar}/bin/waybar"
-        "${pkgs.swww}/bin/swww-daemon && swww img $(cat $HOME/.cache/current-wallpaper)"
+        "${pkgs.awww}/bin/awww-daemon && awww img $(cat $HOME/.cache/current-wallpaper)"
         "${pkgs.networkmanagerapplet}/bin/nm-applet"
         "${pkgs.swayosd}/bin/swayosd-server"
         "${scripts.startReplay}"
@@ -117,7 +118,6 @@
 
       dwindle = {
         # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-        pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true; # you probably want this
       };
 

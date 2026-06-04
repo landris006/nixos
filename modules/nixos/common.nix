@@ -127,10 +127,10 @@
       user = username;
     };
     gdm = {
-      enable = true;
+      enable = false;
     };
     sddm = {
-      enable = false;
+      enable = true;
       wayland.enable = true;
       settings = {
         Autologin = {
@@ -159,7 +159,7 @@
     arduino-ide
     claude-code
     appimage-run
-    inputs.librepods.packages.${pkgs.system}.default
+    inputs.librepods.packages.${pkgs.stdenv.hostPlatform.system}.default
     bluez
     (
       makeDesktopItem {
@@ -227,7 +227,7 @@
     fastfetch
     nodejs
     pavucontrol
-    pkgs.nodePackages.nodemon
+    pkgs.nodemon
     playerctl
     killall
     discord
@@ -239,7 +239,7 @@
     python3Packages.pip
     poetry
     qt5.qtwayland
-    libsForQt5.kio
+    # libsForQt5.kio
     qt6.qtwayland
     remmina
     ripgrep
@@ -254,7 +254,7 @@
     socat
     stow
     swaynotificationcenter
-    swww
+    awww
     slack
     teams-for-linux
     tmux
@@ -330,7 +330,7 @@
 
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-volman
         thunar-archive-plugin
       ];

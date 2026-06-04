@@ -40,6 +40,7 @@
 
   fileSystems."/mnt/store" = {
     device = "/dev/disk/by-uuid/960b95d2-a9d0-44d5-b956-e873d922bd5d";
+    fsType = "ext4";
     options = ["nofail"];
   };
 

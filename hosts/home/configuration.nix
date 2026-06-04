@@ -19,7 +19,7 @@
     ../../modules/nixos/draw.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   programs.droidcam.enable = true;
 

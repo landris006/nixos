@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   cursor-theme = {
     name = "Bibata-Modern-Classic";
     size = 24;
@@ -38,6 +42,7 @@ in {
 
   gtk = {
     enable = true;
+    gtk4.theme = config.gtk.theme;
     theme = {
       name = "catppuccin-mocha-blue-standard";
       package = pkgs.catppuccin-gtk.override {

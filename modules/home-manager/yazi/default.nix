@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   programs.yazi = {
     enable = true;
+    shellWrapperName = "yy";
     plugins = with pkgs.yaziPlugins; {
       inherit git;
       inherit restore;
