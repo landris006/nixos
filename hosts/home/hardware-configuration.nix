@@ -34,8 +34,8 @@
 
   fileSystems."/mnt/D" = {
     device = "/dev/disk/by-uuid/2E72FC4A72FC1873";
-    fsType = "ntfs";
-    options = ["nofail"];
+    fsType = "ntfs3";
+    options = ["nofail" "uid=1000" "gid=100" "umask=022"];
   };
 
   fileSystems."/mnt/store" = {
