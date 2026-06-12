@@ -20,6 +20,7 @@
     extraGroups = ["networkmanager" "wheel" "audio" "video" "render" "docker"];
     # packages = with pkgs; [ ];
   };
+
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
     users = {
@@ -27,6 +28,7 @@
     };
     backupFileExtension = "backup";
   };
+
   services.displayManager.sddm.settings.Autologin = {
     User = "andris";
     Session = "hyprland";

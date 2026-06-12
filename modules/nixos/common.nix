@@ -36,8 +36,6 @@
     memoryPercent = 50;
   };
 
-  hardware.enableRedistributableFirmware = true;
-
   services.dictd.enable = true;
 
   security.rtkit.enable = true;
@@ -232,7 +230,7 @@
     fastfetch
     nodejs
     pavucontrol
-    pkgs.nodemon
+    nodemon
     playerctl
     killall
     discord
@@ -284,7 +282,7 @@
 
   environment.sessionVariables = {
     EDITOR = "nvim";
-    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 0;
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "0";
     # XDG_SESSION_TYPE = "wayland";
     # WLR_NO_HARDWARE_CURSORS = "1";
 

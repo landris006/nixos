@@ -19,7 +19,7 @@
     ../../modules/nixos/draw.nix
   ];
 
-  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   programs.droidcam.enable = true;
 
@@ -45,10 +45,6 @@
       "${username}" = import ./home.nix;
     };
     backupFileExtension = "backup";
-  };
-  services.displayManager.sddm.settings.Autologin = {
-    User = username;
-    Session = "hyprland";
   };
 
   nixpkgs.overlays = [
