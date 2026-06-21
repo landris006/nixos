@@ -160,6 +160,7 @@
         "${mainMod}        , E, exec, thunar"
         "SUPER        SHIFT, S, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
         "SUPER             , L, exec, IMG=$(cat $HOME/.cache/current-wallpaper) ${pkgs.hyprlock}/bin/hyprlock"
+        "SUPER      CONTROL, L, exec, IMG=$(cat $HOME/.cache/current-wallpaper) ${pkgs.hyprlock}/bin/hyprlock & systemctl suspend"
 
         # Alt + Tab
         "${mainMod}, tab, focuscurrentorlast"

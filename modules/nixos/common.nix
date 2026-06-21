@@ -49,6 +49,18 @@
     pulse.enable = true;
     # jack.enable = true;
     # wireplumber.enable = true;
+
+    # When a Bluetooth headset's mic activates, the profile drops from A2DP to
+    # HFP. Force the better HFP codec (mSBC, 16 kHz wideband) instead of letting
+    # it fall back to 8 kHz CVSD. mSBC already has higher profile priority; this
+    # keeps it explicitly enabled along with hardware volume control.
+    wireplumber.extraConfig."51-bluez-msbc" = {
+      "monitor.bluez.properties" = {
+        "bluez5.enable-msbc" = true;
+        "bluez5.enable-sbc-xq" = true;
+        "bluez5.enable-hw-volume" = true;
+      };
+    };
   };
 
   # services.mpd = {
@@ -159,6 +171,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    nmap
     arduino-ide
     claude-code
     appimage-run
