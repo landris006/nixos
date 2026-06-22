@@ -171,6 +171,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    efibootmgr
+    # One-shot reboot straight into Windows. Finds the "Windows Boot Manager"
+    # UEFI entry by name, sets it as BootNext (a single-boot override that the
+    # firmware clears after one boot), then reboots. Next boot returns to Linux.
+    (writeShellScriptBin "reboot-windows" ''
+      set -euo pipefail
+      entry=$(${pkgs.efibootmgr}/bin/efibootmgr \
+        | ${pkgs.gnugrep}/bin/grep -i "Windows Boot Manager" \
+        | ${pkgs.gnused}/bin/sed -E 's/^Boot([0-9A-Fa-f]{4}).*/\1/' \
+        | ${pkgs.coreutils}/bin/head -n1)
+      if [ -z "$entry" ]; then
+        echo "No 'Windows Boot Manager' UEFI entry found." >&2
+        exit 1
+      fi
+      echo "Setting BootNext to $entry (Windows) and rebooting..."
+      sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootnext "$entry" >/dev/null
+      systemctl reboot
+    '')
     nmap
     arduino-ide
     claude-code
