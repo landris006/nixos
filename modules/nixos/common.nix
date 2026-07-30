@@ -90,6 +90,8 @@
     enable32Bit = true;
   };
 
+  hardware.keyboard.qmk.enable = true;
+
   # Enable networking
   networking.networkmanager.enable = true;
 
