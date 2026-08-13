@@ -18,6 +18,7 @@
     ../../modules/nixos/common.nix
     ../../modules/nixos/draw.nix
     ../../modules/nixos/bluetooth.nix
+    ../../modules/nixos/tailscale.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;

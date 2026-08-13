@@ -46,6 +46,7 @@ in {
     ../../modules/nixos/draw.nix
     ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/common.nix
+    ../../modules/nixos/tailscale.nix
   ];
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
