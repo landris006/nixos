@@ -273,7 +273,6 @@
     python3Packages.notebook
     python3Packages.jupyter
     python3Packages.pip
-    poetry
     qt5.qtwayland
     # libsForQt5.kio
     qt6.qtwayland

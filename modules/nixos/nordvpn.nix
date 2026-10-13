@@ -1,7 +1,11 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   nordVpnPkg = pkgs.callPackage ({
     autoPatchelfHook,
-    buildFHSEnvChroot,
+    buildFHSEnv,
     dpkg,
     fetchurl,
     lib,
@@ -20,14 +24,14 @@
     wireguard-tools,
   }: let
     pname = "nordvpn";
-    version = "4.2.3";
+    version = "5.0.0";
 
     nordVPNBase = stdenv.mkDerivation {
       inherit pname version;
 
       src = fetchurl {
         url = "https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/n/nordvpn/nordvpn_${version}_amd64.deb";
-        hash = "sha256-LcTQEqaP1+UeBxi+gqQAuQKKzVgzMWSb7rMEB6qc6hk=";
+        hash = "sha256-F7/5WAAGaX3IJ3v/psp9cyWGs7kn2XOiCSN2Q6zeRAY=";
       };
 
       buildInputs = [libxml2 libidn2 libnl sqlite libcap_ng];
@@ -52,7 +56,7 @@
       '';
     };
 
-    nordVPNfhs = buildFHSEnvChroot {
+    nordVPNfhs = buildFHSEnv {
       name = "nordvpnd";
       runScript = "nordvpnd";
 
@@ -103,7 +107,10 @@ in {
   config = {
     networking.firewall.allowedTCPPorts = [443];
     networking.firewall.allowedUDPPorts = [1194];
-    networking.firewall.checkReversePath = false;
+    # Tailscale's module asks for "loose" to keep exit-node routing working;
+    # NordVPN needs reverse path filtering off entirely. Fully off also
+    # satisfies Tailscale, so override rather than merge (which errors out).
+    networking.firewall.checkReversePath = lib.mkForce false;
 
     environment.systemPackages = [nordVpnPkg];
 

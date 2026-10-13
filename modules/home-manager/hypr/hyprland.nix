@@ -81,8 +81,12 @@
         blur = {
           enabled = true;
           new_optimizations = true;
-          size = 5;
-          passes = 5;
+          # Each pass is a full-resolution render of every blurred surface, so
+          # on a 2560x1600 panel passes are the expensive knob, not size. Two
+          # passes at a wider radius looks near-identical to five at size 5 for
+          # a fraction of the GPU time.
+          size = 8;
+          passes = 2;
         };
 
         shadow = {
@@ -97,9 +101,9 @@
         nvidia_anti_flicker = 0;
       };
 
-      debug = {
-        damage_tracking = 0;
-      };
+      # debug.damage_tracking = 0 used to live here. It disables damage tracking
+      # outright, so every frame redraws the whole 2560x1600 screen instead of
+      # just the region that changed. Left at the default (full tracking).
 
       animations = {
         enabled = true;
@@ -126,7 +130,10 @@
       };
 
       cursor = {
-        no_hardware_cursors = true;
+        # Software cursors force a full composite and page flip on every mouse
+        # movement rather than just moving the GPU's cursor plane. This is an
+        # NVIDIA workaround and nova is amdgpu-only, so let the hardware do it.
+        no_hardware_cursors = false;
       };
 
       xwayland = {

@@ -12,7 +12,9 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [
+    tree-sitter # required by nvim-treesitter (main branch) to compile parsers
+  ];
 
   services.gammastep = {
     enable = true;
