@@ -12,7 +12,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/nixos/ssd.nix
-    ../../modules/nixos/power.nix
     ../../modules/nixos/amd.nix
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/nordvpn.nix
